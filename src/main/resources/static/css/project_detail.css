@@ -1,0 +1,124 @@
+@charset "UTF-8";
+
+.page-header{
+  display: inline-block;
+  width: 300px;
+  text-align: center;
+}
+
+.font-pg-header{
+  font-weight: bold;
+  font-size:20px;
+}
+
+.mini-project-form{
+  width: 500px;
+  margin-top:20px;
+}
+
+.mini-project-text{
+  line-height: 40px;
+  width: 300px;
+  font-size:15px;
+}
+
+.mini-project-button{
+  display: inline-block;
+  background-color: green;
+  color: white;
+  line-height: 40px;
+  padding: 0 20px;
+}
+
+.task-titles{
+  margin-top: 40px;
+}
+
+.project-detail-title{
+  display: inline-block;
+  background-color: green;
+  color:white;
+  width: 900px;
+}
+
+.project-progres-title{
+  display: inline-block;
+  background-color: skyblue;
+  color:white;
+  width: 85px;
+}
+
+.project-progres-cost{
+  display: inline-block;
+  background-color: orange;
+  color:white;
+  width: 290px;
+}
+
+.task-width-80{
+  /* background-color: red; */
+  text-align: center;
+  display: inline-block;
+  width:80px;
+}
+
+.margin-r{
+  margin:0 1px 0 1px;
+  font-size: 3px;
+}
+
+.task-width-200{
+  /* background-color: blue; */
+  text-align: center;
+  display: inline-block;
+  width:200px;
+}
+
+.task-width-150{
+  text-align: center;
+  display: inline-block;
+  width:150px;
+}
+
+.task-list{
+  border-bottom: solid 1px black;
+  width:1380px;
+}
+.task-button{
+  margin-left: 5px;
+  text-decoration: none;
+  background-color: black;
+  color: white;
+  display: inline-block;
+  padding: 0 5px;
+  width: 30px;
+  text-align: center;
+  font-size: 10px;
+  height: 25px;
+  line-height: 25px;
+}
+
+.miniproject-titles{
+  display: flex;
+}
+
+.miniproject-title{
+  width: 200px;
+}
+
+.insert-link{
+  text-decoration: none;
+  background-color: black;
+  display: inline-block;
+  color: white;
+  padding: 0 10px;
+  margin-left: 20px;
+  font-weight: normal;
+  border-radius: 20px;
+  width: 130px;
+  text-align: center;
+}
+
+h1{
+  font-size: 20px;
+}
