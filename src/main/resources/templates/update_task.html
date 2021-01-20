@@ -6,17 +6,16 @@
     <title>Document</title>
     <link rel="stylesheet" th:href="@{/css/task.css}">
 </head>
-<body>
-	<form th:action="@{/registerTask}" method ="post" class="omatome" th:object="${taskBean}">
+<body th:object="${msg}">
+	<form th:object="${taskBean}" th:action="@{/updateTask/{id}(id=${id})}" method ="post" class="omatome">
 		<h1>タスク追加（タスク更新）</h1>
 		<span class="input-title">タスク名</span>
-		<input class="input" type="text" th:field="*{task_title}" id="">
+		<input class="input" type="text" th:field="*{task_title}">
 		<span class="tanni"></span>
 		<br>
 
 		<span class="input-title">ステータス</span>
 		<select class="input" th:field="*{status}" id="">
-			<option value=100>選択してください</option>
 			<option value="0">保留</option>
 			<option value="1">開始前</option>
 			<option value="2">実行中</option>
@@ -27,7 +26,6 @@
 
 		<span class="input-title">優先度</span>
 		<select class="input" th:field="*{priority}" id="">
-			<option value=100>選択してください</option>
 			<option value="0">低</option>
 			<option value="1">中</option>
 			<option value="2">高</option>
@@ -58,21 +56,19 @@
 		<br>
 
 		<span class="input-title">完了率</span>
-		<input class="input text-right" type="number" th:fields="*{complete_rate}" max="100" min="0" placeholder="0">
+		<input class="input text-right" type="number" th:field="*{complete_rate}">
 		<span class="tanni">%</span>
 		<br>
 
 		<span class="input-title">固定費</span>
-		<input class="input text-right" type="number" th:field="*{fixed_cost}" min="0" placeholder="0">
+		<input class="input text-right" type="number" th:field="*{fixed_cost}" min="0">
 		<span class="tanni">円</span>
 		<br>
 
 		<span class="input-title">時間</span>
-		<input class="input text-right" type="number" th:field="*{required_time}" placeholder="0">
+		<input class="input text-right" type="number" th:field="*{required_time}">
 		<span class="tanni">分</span>
 		<br>
-
-		<input type="hidden" th:field="*{started_date}" th:value="${now}">
 
 		<span class="input-title"></span>
 		<input  th:object="${now}" class="input button" type="submit" value="登録">

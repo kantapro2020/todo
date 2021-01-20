@@ -1,14 +1,18 @@
 package com.todo.beans;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
+import org.springframework.lang.NonNull;
+
 public class Task implements Serializable {
         private static final long serialVersionUID = -41353466463452342L;
         private int id;
+
         @Size(min = 1, max = 20)
         private String task_title;
         @Min(0)
@@ -17,10 +21,10 @@ public class Task implements Serializable {
         @Min(0)
         @Max(2)
         private int priority;
-        @Size(min = 1)
-        private String started_date;
-        @Size(min = 1)
-        private String predict_finished_date;
+        @NonNull
+        private Date started_date;
+        @NonNull
+        private Date predict_finished_date;
         @Size(min = 1, max=50)
         private String explanation;
         @Min(0)
@@ -66,25 +70,25 @@ public class Task implements Serializable {
         /**
          * @return started_date
          */
-        public String getStarted_date() {
+        public Date getStarted_date() {
             return started_date;
         }
         /**
          * @param started_date セットする started_date
          */
-        public void setStarted_date(String started_date) {
+        public void setStarted_date(Date started_date) {
             this.started_date = started_date;
         }
         /**
          * @return predict_finished_date
          */
-        public String getPredict_finished_date() {
+        public Date getPredict_finished_date() {
             return predict_finished_date;
         }
         /**
          * @param predict_finished_date セットする predict_finished_date
          */
-        public void setPredict_finished_date(String predict_finished_date) {
+        public void setPredict_finished_date(Date predict_finished_date) {
             this.predict_finished_date = predict_finished_date;
         }
         /**

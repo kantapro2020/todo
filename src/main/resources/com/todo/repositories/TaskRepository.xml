@@ -10,4 +10,81 @@
 			(#{task_title}, #{status}, #{priority}, #{started_date},#{predict_finished_date},#{explanation},#{complete_rate},#{fixed_cost}, #{required_time},#{mini_project_id});
 		]]>
 	</insert>
+
+	<update id="updateTask" parameterType="com.todo.beans.Task">
+		<![CDATA[
+			update tasks set
+				task_title = #{task_title},
+				status = #{status},
+				priority = #{priority},
+				started_date = #{started_date},
+				predict_finished_date = #{predict_finished_date},
+				explanation = #{explanation},
+				complete_rate = #{complete_rate},
+				fixed_cost = #{fixed_cost},
+				required_time = #{required_time},
+				mini_project_id = #{mini_project_id}
+			where id = #{id};
+		]]>
+	</update>
+
+	<delete id="deleteTask" parameterType="java.lang.Integer">
+		<![CDATA[
+			delete from tasks
+			where id = #{id}
+		]]>
+	</delete>
+
+	<select id ="getTask" parameterType="java.lang.Integer" resultMap="getTask">
+	<![CDATA[
+		select
+			id,
+			task_title,
+			status,
+			priority,
+			started_date,
+			predict_finished_date,
+			explanation,
+			complete_rate,
+			fixed_cost,
+			required_time,
+			mini_project_id
+		from tasks
+		where id = #{id};
+	]]>
+	</select>
+
+	<resultMap type="com.todo.beans.Task" id="getTask">
+		<result property="id" column="id"></result>
+		<result property="task_title" column="task_title"></result>
+		<result property="status" column="status"></result>
+		<result property="priority" column="priority"></result>
+		<result property="started_date" column="started_date"></result>
+		<result property="predict_finished_date" column="predict_finished_date"></result>
+		<result property="explanation" column="explanation"></result>
+		<result property="complete_rate" column="complete_rate"></result>
+		<result property="fixed_cost" column="fixed_cost"></result>
+		<result property="required_time" column="required_time"></result>
+		<result property="mini_project_id" column="mini_project_id"></result>
+	</resultMap>
+
+	<select id ="getTaskList" parameterType="map" resultMap="getTask">
+	<![CDATA[
+		select
+			id,
+			task_title,
+			status,
+			priority,
+			started_date,
+			predict_finished_date,
+			explanation,
+			complete_rate,
+			fixed_cost,
+			required_time,
+			mini_project_id
+		from tasks
+		where task_title LIKE '%${param1}%'
+		order by ${param2} ${param3};
+	]]>
+	</select>
 </mapper>

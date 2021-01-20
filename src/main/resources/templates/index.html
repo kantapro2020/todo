@@ -5,6 +5,60 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<a th:href="@{/task}">タスク新規</a>
+	<a th:href="@{/registerTask}">タスク新規</a>
+	<form th:action="@{/searchTask}" method="post">
+		<input type="text" name="keyword">
+		<select name="sort">
+			<option value="id">登録順</option>
+			<option value="status">ステータス</option>
+			<option value="priority">優先度</option>
+			<option value="started_date">開始日</option>
+			<option value="predict_finished_date">終了日</option>
+			<option value="complete_rate">完了率</option>
+			<option value="fixed_cost">固定費</option>
+			<option value="required_time">所要時間</option>
+		</select>
+		<select name="order">
+			<option value="Asc">昇順</option>
+			<option value="Desc">降順</option>
+		</select>
+		<input type="submit" value="検索">
+	</form>
+	<div th:object="${result}" th:if="${result}">
+		<table border=1>
+			<tr>
+		        <th class="task-width-200">ID</th>
+		        <th class="task-width-200">タスク名</th>
+		        <th class="task-width-80">ステータス</th>
+		        <th class="task-width-80">優先度</th>
+		        <th class="task-width-80">開始日</th>
+		        <th class="task-width-80">終了日</th>
+		        <th class="task-width-200">説明</th>
+		        <th class="task-width-80">完了率</th>
+		        <th class="task-width-200">固定費</th>
+		        <th class="task-width-80">時間(m)</th>
+		        <th class="task-width-150">担当者</th>
+	    	</tr>
+	    	<tr th:each="task:${result}">
+	    		<td th:text="${task.id}"></td>
+	    		<td th:text="${task.task_title}"></td>
+	    		<td th:text="${task.status}"></td>
+	    		<td th:text="${task.priority}"></td>
+	    		<td th:text="${task.started_date}"></td>
+	    		<td th:text="${task.predict_finished_date}"></td>
+	    		<td th:text="${task.explanation}"></td>
+	    		<td th:text="${task.complete_rate}"></td>
+	    		<td th:text="${task.fixed_cost}"></td>
+	    		<td th:text="${task.required_time}"></td>
+	    		<td></td>
+	    		<td><a th:href="@{/updateTask/{id}(id=${task.id})}">タスク編集</a></td>
+	    		<td>
+	    			<form th:action="@{/deleteTask/{id}(id=${task.id})}" method="post">
+						<input type="submit" value="タスク削除">
+					</form>
+				</td>
+	    	</tr>
+		</table>
+	</div>
 </body>
 </html>
