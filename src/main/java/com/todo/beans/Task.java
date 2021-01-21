@@ -12,7 +12,6 @@ import org.springframework.lang.NonNull;
 public class Task implements Serializable {
         private static final long serialVersionUID = -41353466463452342L;
         private int id;
-
         @Size(min = 1, max = 20)
         private String task_title;
         @Min(0)

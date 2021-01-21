@@ -24,7 +24,7 @@ public class RootController {
 
     @RequestMapping("/")
     public String root(Model model) {
-        LinkedList<Task> result = taskRepository.getTaskList("", "id", "Desc");
+        LinkedList<Task> result = taskRepository.getTaskList("", "id", "Asc");
         model.addAttribute("result", result);
         return "index";
     }
