@@ -34,6 +34,7 @@ public class Task implements Serializable {
         private  int required_time;
         @Min(1)
         private int mini_project_id;
+//        private User user;
 
         public String getTask_title() {
             return task_title;

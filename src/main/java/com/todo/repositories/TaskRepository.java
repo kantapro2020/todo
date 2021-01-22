@@ -10,7 +10,7 @@ import com.todo.beans.Task;
 public interface TaskRepository {
     public int registerTask(Task task);
     public Task getTask(int id);
-    public LinkedList<Task> getTaskList(String keyword, String sort, String order);
+    public LinkedList<Task> getTaskList(String keyword, int status, int priority,  String sort, String order);
     public int updateTask(Task task);
     public int deleteTask(int id);
 }

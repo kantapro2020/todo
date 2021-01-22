@@ -24,7 +24,7 @@ public class RootController {
 
     @RequestMapping("/")
     public String root(Model model) {
-        LinkedList<Task> result = taskRepository.getTaskList("", "id", "Asc");
+        LinkedList<Task> result = taskRepository.getTaskList("", 100, 100 , "id", "Asc");
         model.addAttribute("result", result);
         return "index";
     }
@@ -37,9 +37,11 @@ public class RootController {
     }
 
     @PostMapping("/registerTask")
-    public String registerTask(@ModelAttribute Task task) {
+    public String registerTask(@ModelAttribute Task task, Model model) {
         taskRepository.registerTask(task);
-        return "project_detail";
+        LinkedList<Task> result = taskRepository.getTaskList("", 100, 100 , "id", "Asc");
+        model.addAttribute("result", result);
+        return "index";
     }
 
     @GetMapping("/updateTask/{id}")
@@ -51,25 +53,35 @@ public class RootController {
     }
 
     @PostMapping("/updateTask/{id}")
-    public String updateTask(@PathVariable int  id, @ModelAttribute Task task) {
-        System.out.println(task.getId());
+    public String updateTask(@PathVariable int  id, @ModelAttribute Task task, Model model) {
         taskRepository.updateTask(task);
+        LinkedList<Task> result = taskRepository.getTaskList("", 100, 100 , "id", "Asc");
+        model.addAttribute("result", result);
         return "index";
     }
 
     @PostMapping("/deleteTask/{id}")
-    public String deleteTask(@PathVariable int id) {
+    public String deleteTask(@PathVariable int id, Model model) {
         taskRepository.deleteTask(id);
+        LinkedList<Task> result = taskRepository.getTaskList("", 100, 100 , "id", "Asc");
+        model.addAttribute("result", result);
         return "index";
     }
 
     @PostMapping("/searchTask")
     public String searchTask(@Param("keyword") String keyword,
+                                            @Param("status")int status,
+                                            @Param("priority")int priority,
                                             @Param("sort")String sort,
                                             @Param("order")String order,
                                              Model model) {
-        LinkedList<Task> result = taskRepository.getTaskList(keyword, sort, order);
+        LinkedList<Task> result = taskRepository.getTaskList(keyword, status , priority , sort, order);
         model.addAttribute("result",result);
         return "index";
+    }
+
+    @GetMapping("/project_detail")
+    public String projectDetail() {
+        return "project_detail";
     }
 }

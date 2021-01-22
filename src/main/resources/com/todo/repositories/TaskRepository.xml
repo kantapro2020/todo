@@ -84,7 +84,17 @@
 			mini_project_id
 		from tasks
 		where task_title LIKE '%${param1}%'
-		order by ${param2} ${param3};
+		and
+		case
+			when ${param2} = 100 then status<= 3
+			else status = ${param2}
+		end
+		and
+		case
+			when ${param3} = 100 then priority <= 2
+			else  priority = ${param3}
+		end
+		order by ${param4} ${param5};
 	]]>
 	</select>
 </mapper>

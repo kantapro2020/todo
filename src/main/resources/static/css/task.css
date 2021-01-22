@@ -5,7 +5,6 @@
     text-align: right;
     color: rgb(7, 26, 2);
     /* margin-right:50px; */
-    background-color: green;
 }
 
 .omatome{
@@ -15,12 +14,10 @@
 
 .input{
     width: 200px;
-    background-color: pink;
 }
 
 .button{
     margin-top: 20px;
-    background-color: red;
 
 }
 
@@ -33,14 +30,8 @@
 .tanni{
     display: inline-block;
     width: 30px;
-    background-color: blue;
 }
 
 .text-right{
     text-align: right;
-}
-
-.textarea-title{
-
-
 }
