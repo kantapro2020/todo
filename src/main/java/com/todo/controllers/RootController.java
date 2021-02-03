@@ -100,7 +100,17 @@ public class RootController {
     	LinkedList<Project> projects = projectRepository.getProjectList(1);
         model.addAttribute("projects",projects);
     	return "project_list";
+<<<<<<< Updated upstream
     }    
+=======
+    }
+//    public String registerProject(Model model) {
+//        model.addAttribute("projectBean", new Project());
+//        model.addAttribute("now", new Date());
+//        return "project_list";
+//    }
+
+>>>>>>> Stashed changes
 
     @PostMapping("/registerProject")
     public String registerProject(@ModelAttribute Project project, Model model) {
@@ -111,3 +121,9 @@ public class RootController {
     }
 }
 
+<<<<<<< Updated upstream
+=======
+
+
+}
+>>>>>>> Stashed changes
