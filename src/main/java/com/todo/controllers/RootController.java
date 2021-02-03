@@ -7,8 +7,9 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,48 +30,56 @@ public class RootController {
 
     @RequestMapping("/")
     public String root(Model model) {
-        LinkedList<Task> result = taskRepository.getTaskList("", 100, 100 , "id", "Asc");
+        LinkedList<Task> result = taskRepository.getTaskList("", 100, 100 ,100, "id", "Asc");
         model.addAttribute("result", result);
         return "index";
     }
 
+    @GetMapping("project_detail")
+    public String projectDetail(Model model) {
+        LinkedList<Task> result = taskRepository.getTaskList("", 100, 100 , 1, "id", "Asc");
+        model.addAttribute("result", result);
+        return "project_detail";
+    }
+
     @GetMapping("/registerTask")
-    public String task(Model model) {
-        model.addAttribute("taskBean", new Task());
+    public String task(Model model,  Task task) {
+        model.addAttribute("taskBean", task);
         model.addAttribute("now", new Date());
         return "register_task";
     }
 
     @PostMapping("/registerTask")
-    public String registerTask(@ModelAttribute Task task, Model model) {
+    public String registerTask(@Validated Task task, BindingResult bindingResult ,Model model) {
         taskRepository.registerTask(task);
-        LinkedList<Task> result = taskRepository.getTaskList("", 100, 100 , "id", "Asc");
+        LinkedList<Task> result = taskRepository.getTaskList("", 100, 100 , 100, "id", "Asc");
         model.addAttribute("result", result);
-        return "index";
+        return "project_detail";
     }
+
 
     @GetMapping("/updateTask/{id}")
     public String updateTaskPage(@PathVariable int  id, Model model) {
         Task task = taskRepository.getTask(id);
         model.addAttribute("taskBean", task);
-        model.addAttribute("msg", "Hello");
         return "update_task";
     }
 
     @PostMapping("/updateTask/{id}")
-    public String updateTask(@PathVariable int  id, @ModelAttribute Task task, Model model) {
+    public String updateTask(@PathVariable int  id, @Validated Task task, BindingResult bindingResult,  Model model) {
+
         taskRepository.updateTask(task);
-        LinkedList<Task> result = taskRepository.getTaskList("", 100, 100 , "id", "Asc");
+        LinkedList<Task> result = taskRepository.getTaskList("", 100, 100 , 100, "id", "Asc");
         model.addAttribute("result", result);
-        return "index";
+        return "project_detail";
     }
 
     @PostMapping("/deleteTask/{id}")
     public String deleteTask(@PathVariable int id, Model model) {
         taskRepository.deleteTask(id);
-        LinkedList<Task> result = taskRepository.getTaskList("", 100, 100 , "id", "Asc");
+        LinkedList<Task> result = taskRepository.getTaskList("", 100, 100 ,100, "id", "Asc");
         model.addAttribute("result", result);
-        return "index";
+        return "project_detail";
     }
 
     @PostMapping("/searchTask")
@@ -80,9 +89,9 @@ public class RootController {
                                             @Param("sort")String sort,
                                             @Param("order")String order,
                                              Model model) {
-        LinkedList<Task> result = taskRepository.getTaskList(keyword, status , priority , sort, order);
+        LinkedList<Task> result = taskRepository.getTaskList(keyword, status , priority ,1, sort, order);
         model.addAttribute("result",result);
-        return "index";
+        return "project_detail";
     }
 
 
@@ -91,13 +100,7 @@ public class RootController {
     	LinkedList<Project> projects = projectRepository.getProjectList(1);
         model.addAttribute("projects",projects);
     	return "project_list";
-    }
-//    public String registerProject(Model model) {
-//        model.addAttribute("projectBean", new Project());
-//        model.addAttribute("now", new Date());
-//        return "project_list";
-//    }
-    
+    }    
 
     @PostMapping("/registerProject")
     public String registerProject(@ModelAttribute Project project, Model model) {
@@ -106,7 +109,5 @@ public class RootController {
         model.addAttribute("project", projects);
         return "project_list";
     }
-
-
-    
 }
+

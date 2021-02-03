@@ -6,158 +6,99 @@
 <title>Insert title here</title>
 </head>
 <body>
-  <table border="1">
-    <tr>
-      <td class="page-header font-pg-header">プロジェクトA</td>
-      <td class="page-header font-pg-header">蛭間寛太</td>
-      <td class="page-header font-pg-header">Y&I</td>
-      <td class="page-header font-pg-header">2021/01/01</td>
-    </tr>
-  </table>
-  <form class="mini-project-form">
-    <input class="mini-project-text" placeholder="ミニプロジェクト名を入力" type="text">
-    <input class="mini-project-button" value ="追加"type="submit">
-  </form>
+	<table>
+		<tr>
+			<td class="page-header font-pg-header">プロジェクトA</td>
+			<td class="page-header font-pg-header">蛭間寛太</td>
+			<td class="page-header font-pg-header">2021/01/01</td>
+		</tr>
+	</table>
 
-  <table  border="1">
-    <div class="task-titles">
-      <span class="project-detail-title">プロジェクトの詳細</span><span class="project-progres-title">進捗</span><span class="project-progres-cost">費用／所要時間</span>
-    </div>
-      <tr>
-        <th class="task-width-80">ステータス</th>
-        <th class="task-width-80">優先度</th>
-        <th class="task-width-80">開始日</th>
-        <th class="task-width-80">終了日</th>
-        <th class="task-width-200">タスク名</th>
-        <th class="task-width-150">担当者</th>
-        <th class="task-width-200">説明</th>
-        <th class="task-width-80">完了率</th>
-        <th class="task-width-200">固定費</th>
-        <th class="task-width-80">時間(m)</th>
-      </tr>
-    </table>
+	<div class="miniproject-titles">
+		<h1 class="miniproject-title">ミニプロジェクトA</h1><h1><a class="insert-link" th:href="@{/registerTask}">タスク追加</a></h1>
+	</div>
 
-    <div class="miniproject-titles">
-      <h1 class="miniproject-title">ミニプロジェクトA</h1><h1><a class="insert-link" href="#">タスク追加</a></h1>
-    </div>
-    <div class="task-list">
-      <table>
-        <tr>
-          <td class="task-width-80 margin-r">実施中</td>
-          <td class="task-width-80 margin-r">高</td>
-          <td class="task-width-80 margin-r">01/02</td>
-          <td class="task-width-80 margin-r">01/25</td>
-          <td class="task-width-200 margin-r">ログインページ改修</td>
-          <td class="task-width-150 margin-r">金澤伸行</td>
-          <td class="task-width-200 margin-r">ログインボタンが動作していないので改修</td>
-          <td class="task-width-80 margin-r">25%</td>
-          <td class="task-width-200 margin-r">200,000</td>
-          <td class="task-width-80 margin-r">40分</td>
-          <td><a class="task-button" href="#">変更</a></td>
-          <td><a class="task-button" href="#">削除</a></td>
-        </tr>
-      </table>
-    </div>
-<!-- ミニプロジェクト繰り返し------------------------------------------ -->
-    <div class="task-list">
-      <table>
-        <tr>
-          <td class="task-width-80 margin-r">実施中</td>
-          <td class="task-width-80 margin-r">高</td>
-          <td class="task-width-80 margin-r">01/02</td>
-          <td class="task-width-80 margin-r">01/25</td>
-          <td class="task-width-200 margin-r">ログインページ改修</td>
-          <td class="task-width-150 margin-r">金澤伸行</td>
-          <td class="task-width-200 margin-r">ログインボタンが動作していないので改修</td>
-          <td class="task-width-80 margin-r">25%</td>
-          <td class="task-width-200 margin-r">200,000</td>
-          <td class="task-width-80 margin-r">40分</td>
-          <td><a class="task-button" href="#">変更</a></td>
-          <td><a class="task-button" href="#">削除</a></td>
-        </tr>
-      </table>
-    </div>
-    <div class="task-list">
-      <table>
-        <tr>
-          <td class="task-width-80 margin-r">実施中</td>
-          <td class="task-width-80 margin-r">高</td>
-          <td class="task-width-80 margin-r">01/02</td>
-          <td class="task-width-80 margin-r">01/25</td>
-          <td class="task-width-200 margin-r">ログインページ改修</td>
-          <td class="task-width-150 margin-r">金澤伸行</td>
-          <td class="task-width-200 margin-r">ログインボタンが動作していないので改修</td>
-          <td class="task-width-80 margin-r">25%</td>
-          <td class="task-width-200 margin-r">200,000</td>
-          <td class="task-width-80 margin-r">40分</td>
-          <td><a class="task-button" href="#">変更</a></td>
-          <td><a class="task-button" href="#">削除</a></td>
-        </tr>
-      </table>
-    </div>
-<!-- ミニプロジェクト繰り返し------------------------------------------ -->
+	<form th:action="@{/searchTask}" method="post">
+		<label>検索条件</label>
+		<input type="text" name="keyword">
+		<select name="status" />
+			<option value="100" selected="selected">ステータス</option>
+			<option value="0">保留</option>
+			<option value="1">開始前</option>
+			<option value="2">実行中</option>
+			<option value="3">完了</option>
+		</select>
+		<select name="priority">
+			<option value="100" selected="selected">優先度</option>
+			<option value="0">低</option>
+			<option value="1">中</option>
+			<option value="2">高</option>
+		</select>
+		<label>並び替え条件</label>
+		<select name="sort">
+			<option value="id">登録順</option>
+			<option value="status">ステータス</option>
+			<option value="priority">優先度</option>
+			<option value="started_date">開始日</option>
+			<option value="predict_finished_date">終了日</option>
+			<option value="complete_rate">完了率</option>
+			<option value="fixed_cost">固定費</option>
+			<option value="required_time">所要時間</option>
+		</select>
+		<select name="order">
+			<option value="Asc">昇順</option>
+			<option value="Desc">降順</option>
+		</select>
+		<input type="submit" value="検索">
+	</form>
+<!--   ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー -->
+	<div class="task-titles">
+		<span class="project-detail-title">プロジェクトの詳細</span><span class="project-progres-title">進捗</span><span class="project-progres-cost">費用／所要時間</span>
+	</div>
+	 <table th:object="${result}">
+		<tr>
+			<th class="task-width-200 margin-r table-title">タスク名</th>
+			<th class="task-width-80 margin-r table-title">ステータス</th>
+			<th class="task-width-80 margin-r table-title">優先度</th>
+			<th class="task-width-80 margin-r table-title">開始日</th>
+			<th class="task-width-80 margin-r table-title">終了日</th>
+			<th class="task-width-150 margin-r table-title">担当者</th>
+			<th class="task-width-200 margin-r table-title">説明</th>
+			<th class="task-width-80 margin-r table-title">完了率</th>
+			<th class="task-width-200 margin-r table-title">固定費</th>
+			<th class="task-width-80 margin-r table-title">時間(m)</th>
+		</tr>
 
+		<tr th:if="${result}" th:each="task:${result}">
+			<td class="task-width-200 margin-r" th:text="${task.task_title}"></td>
+			<td class="task-width-80 margin-r" th:switch="${task.status}">
+				<span th:case="0">保留</span>
+				<span th:case="1">開始前</span>
+				<span th:case="2">実行中</span>
+				<span th:case="3">完了</span>
+				<span th:case="*">対象無し</span>
+			</td>
+			<td class="task-width-80 margin-r" th:switch="${task.priority}">
+				<span th:case="0">低</span>
+				<span th:case="1">中</span>
+				<span th:case="2">高</span>
+				<span th:case="*">対象なし</span>
+			</td>
+			<td class="task-width-80 margin-r" th:text="${task.started_date}"></td>
+			<td class="task-width-80 margin-r"  th:text="${task.predict_finished_date}"></td>
+			<td class="task-width-150 margin-r">金澤伸行</td>
+			<td class="task-width-200 margin-r" th:text="${task.explanation}"></td>
+			<td class="task-width-80 margin-r" th:text="${task.complete_rate}"></td>
+			<td class="task-width-200 margin-r" th:text="${task.fixed_cost}"></td>
+			<td class="task-width-80 margin-r" th:text="${task.required_time}"></td>
+			<td><a th:href="@{/updateTask/{id}(id=${task.id})}">編集</a></td>
+			<td>
+				<form th:action="@{/deleteTask/{id}(id=${task.id})}" method="post">
+					<input type="submit" value="削除">
+				</form>
+			</td>
 
-<!-- プロジェクト繰り返し------------------------------------------ -->
-    <div class="miniproject-titles">
-      <h1 class="miniproject-title">ミニプロジェクトB</h1><h1><a class="insert-link" href="#">タスク追加</a></h1>
-    </div>
-    <div class="task-list">
-      <table>
-        <tr>
-          <td class="task-width-80 margin-r">実施中</td>
-          <td class="task-width-80 margin-r">高</td>
-          <td class="task-width-80 margin-r">01/02</td>
-          <td class="task-width-80 margin-r">01/25</td>
-          <td class="task-width-200 margin-r">ログインページ改修</td>
-          <td class="task-width-150 margin-r">金澤伸行</td>
-          <td class="task-width-200 margin-r">ログインボタンが動作していないので改修</td>
-          <td class="task-width-80 margin-r">25%</td>
-          <td class="task-width-200 margin-r">200,000</td>
-          <td class="task-width-80 margin-r">40分</td>
-          <td><a class="task-button" href="#">変更</a></td>
-          <td><a class="task-button" href="#">削除</a></td>
-        </tr>
-      </table>
-    </div>
-<!-- ミニプロジェクト繰り返し------------------------------------------ -->
-    <div class="task-list">
-      <table>
-        <tr>
-          <td class="task-width-80 margin-r">実施中</td>
-          <td class="task-width-80 margin-r">高</td>
-          <td class="task-width-80 margin-r">01/02</td>
-          <td class="task-width-80 margin-r">01/25</td>
-          <td class="task-width-200 margin-r">ログインページ改修</td>
-          <td class="task-width-150 margin-r">金澤伸行</td>
-          <td class="task-width-200 margin-r">ログインボタンが動作していないので改修</td>
-          <td class="task-width-80 margin-r">25%</td>
-          <td class="task-width-200 margin-r">200,000</td>
-          <td class="task-width-80 margin-r">40分</td>
-          <td><a class="task-button" href="#">変更</a></td>
-          <td><a class="task-button" href="#">削除</a></td>
-        </tr>
-      </table>
-    </div>
-    <div class="task-list">
-      <table>
-        <tr>
-          <td class="task-width-80 margin-r">実施中</td>
-          <td class="task-width-80 margin-r">高</td>
-          <td class="task-width-80 margin-r">01/02</td>
-          <td class="task-width-80 margin-r">01/25</td>
-          <td class="task-width-200 margin-r">ログインページ改修</td>
-          <td class="task-width-150 margin-r">金澤伸行</td>
-          <td class="task-width-200 margin-r">ログインボタンが動作していないので改修</td>
-          <td class="task-width-80 margin-r">25%</td>
-          <td class="task-width-200 margin-r">200,000</td>
-          <td class="task-width-80 margin-r">40分</td>
-          <td><a class="task-button" href="#">変更</a></td>
-          <td><a class="task-button" href="#">削除</a></td>
-        </tr>
-      </table>
-    </div>
-<!-- ミニプロジェクト繰り返し------------------------------------------ -->
-<!-- プロジェクト繰り返し------------------------------------------ -->
+	  	</tr>
+	</table>
   </body>
 </html>
