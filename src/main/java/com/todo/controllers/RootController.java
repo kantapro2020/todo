@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.todo.beans.Project;
 import com.todo.beans.Task;
+import com.todo.repositories.ProjectRepository;
 import com.todo.repositories.TaskRepository;
 
 @Controller
@@ -21,6 +23,9 @@ public class RootController {
 
     @Autowired
     TaskRepository taskRepository;
+//    蛭間記述
+    @Autowired
+    ProjectRepository projectRepository;
 
     @RequestMapping("/")
     public String root(Model model) {
@@ -80,8 +85,28 @@ public class RootController {
         return "index";
     }
 
-    @GetMapping("/project_detail")
-    public String projectDetail() {
-        return "project_detail";
+
+    @GetMapping("/registerProject")
+    public String getProjectList(Model model) {
+    	LinkedList<Project> projects = projectRepository.getProjectList(1);
+        model.addAttribute("projects",projects);
+    	return "project_list";
     }
+//    public String registerProject(Model model) {
+//        model.addAttribute("projectBean", new Project());
+//        model.addAttribute("now", new Date());
+//        return "project_list";
+//    }
+    
+
+    @PostMapping("/registerProject")
+    public String registerProject(@ModelAttribute Project project, Model model) {
+        projectRepository.registerProject(project);
+        LinkedList<Project> projects = projectRepository.getProjectList(1);
+        model.addAttribute("project", projects);
+        return "project_list";
+    }
+
+
+    
 }
