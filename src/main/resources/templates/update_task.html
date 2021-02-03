@@ -56,7 +56,7 @@
 		<br>
 
 		<span class="input-title">完了率</span>
-		<input class="input text-right" type="number" th:field="*{complete_rate}">
+		<input class="input text-right" type="number" th:field="*{complete_rate}" min="0" max="100" >
 		<span class="tanni">%</span>
 		<br>
 
@@ -66,7 +66,7 @@
 		<br>
 
 		<span class="input-title">時間</span>
-		<input class="input text-right" type="number" th:field="*{required_time}">
+		<input class="input text-right" type="number" th:field="*{required_time}" min="1">
 		<span class="tanni">分</span>
 		<br>
 

@@ -11,6 +11,7 @@
 		<h1>タスク追加（タスク更新）</h1>
 		<span class="input-title">タスク名</span>
 		<input class="input" type="text" th:field="*{task_title}">
+		<p th:if="${#fields.hasErrors('task_title')}">aaaaaaaa</p>
 		<span class="tanni"></span>
 		<br>
 
@@ -59,7 +60,7 @@
 		<br>
 
 		<span class="input-title">完了率</span>
-		<input class="input text-right" type="number" th:fields="*{complete_rate}" min="0" max="100" >
+		<input class="input text-right" type="number" th:field="*{complete_rate}" min="0" max="100" >
 		<span class="tanni">%</span>
 		<br>
 
@@ -69,7 +70,7 @@
 		<br>
 
 		<span class="input-title">時間</span>
-		<input class="input text-right" type="number" th:field="*{required_time}" min=0>
+		<input class="input text-right" type="number" th:field="*{required_time}" min="1" value="1">
 		<span class="tanni">分</span>
 		<br>
 

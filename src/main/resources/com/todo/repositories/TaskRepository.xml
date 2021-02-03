@@ -94,7 +94,12 @@
 			when ${param3} = 100 then priority <= 2
 			else  priority = ${param3}
 		end
-		order by ${param4} ${param5};
+		and
+		case
+			when ${param4} = 100 then 1 = 1
+			else mini_project_id = ${param4}
+		end
+		order by ${param5} ${param6};
 	]]>
 	</select>
 </mapper>
