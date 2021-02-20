@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/css/reset.css}">
+<link rel="stylesheet" th:href="@{/css/header.css}">
+<link rel="stylesheet" th:href="@{/css/main-left.css}">
+<link rel="stylesheet" th:href="@{/css/miniProjectList.css}">
+<title>Insert title here</title>
+</head>
+<body>
+	<header>
+    	<div th:replace="header"></div>
+    </header>
+
+	<div class="main">
+	    <div class="main-left">
+		    <div class="userdatas">
+				<h1 class="userdata">Y&I Group</h1>
+				<h1 class="userdata">蛭間寛太</h1>
+		    </div>
+			<div class="list">
+				<h1 class="list-title">プロジェクト一覧</h1>
+				<p><a class="list-name" href="#">プロジェクト名</a></p>
+				<p><a class="list-name" href="#">プロジェクト名</a></p>
+				<p><a class="list-name" href="#">プロジェクト名</a></p>
+				<p><a class="list-name" href="#">プロジェクト名</a></p>
+				<p><a class="list-name" href="#">プロジェクト名</a></p>
+			</div>
+	    </div>
+		<div class="main-right">
+			<h1 class="mini-project-title">プロジェクト名＞ミニプロジェクト一覧</h1>
+			<form class="search-form" th:object="${mini_project}" th:action="@{/searchTask/{mini_project_id}(mini_project_id=${mini_project_id})}" method="post" >
+				<label>絞り込み</label>
+				<input type="text" name="keyword">
+				<select name="status" />
+					<option value="100" selected="selected">ステータス</option>
+					<option value="0">保留</option>
+					<option value="1">開始前</option>
+					<option value="2">実行中</option>
+					<option value="3">完了</option>
+				</select>
+				<select name="priority">
+					<option value="100" selected="selected">優先度</option>
+					<option value="0">低</option>
+					<option value="1">中</option>
+					<option value="2">高</option>
+				</select>
+				<label>並び替え条件</label>
+				<select name="sort">
+					<option value="id">登録順</option>
+					<option value="status">ステータス</option>
+					<option value="priority">優先度</option>
+					<option value="started_date">開始日</option>
+					<option value="predict_finished_date">終了日</option>
+					<option value="required_time">所要日数</option>
+				</select>
+				<select name="order">
+					<option value="Asc">昇順</option>
+					<option value="Desc">降順</option>
+				</select>
+				<input type="submit" value="検索">
+			</form>
+			<table  border="1" class="mini-projects" th:object="${mini_projects}" >
+				<tr>
+					<th class="mini-project-list-title">ミニプロジェクト名</th>
+					<th class="mini-project-list-title">完了率</th>
+					<th class="mini-project-list-title">担当者名</th>
+					<th class="mini-project-list-title"></th>
+					<th class="mini-project-list-title"></th>
+				</tr>
+				<tr th:if="${mini_projects}" th:each="mini_project:${mini_projects}">
+					<td class="mini-project-list-name"><a th:text="${mini_project.mini_project_title}" th:href="@{/{project_id}/project_detail/{mini_project_id}(project_id=1, mini_project_id=${mini_project.id})}"></a></td>
+					<td class="mini-project-list-name">85%</td>
+					<td class="mini-project-list-name">金澤伸行</td>
+					<td class="mini-project-list-name"><a href="#">更新</a></td>
+					<td class="mini-project-list-name">
+						<form th:action="@{/{project_id}/deleteMiniProjectList/{mini_project_id}(project_id=1, mini_project_id=${mini_project.id})}" method="post">
+							<input type="submit" value="削除">
+						</form>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</body>
+</html>

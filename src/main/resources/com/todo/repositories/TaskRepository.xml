@@ -5,9 +5,9 @@
 	<insert id="registerTask" parameterType="com.todo.beans.Task" useGeneratedKeys="true" keyProperty="id">
 		<![CDATA[
 			insert into tasks
-			(task_title, status, priority, started_date, predict_finished_date, explanation, complete_rate, fixed_cost, required_time, mini_project_id)
+			(task_title, status, priority, started_date, predict_finished_date, explanation, required_time ,mini_project_id)
 			VALUES
-			(#{task_title}, #{status}, #{priority}, #{started_date},#{predict_finished_date},#{explanation},#{complete_rate},#{fixed_cost}, #{required_time},#{mini_project_id});
+			(#{task_title}, #{status}, #{priority}, #{started_date},#{predict_finished_date},#{explanation}, #{required_time},#{mini_project_id});
 		]]>
 	</insert>
 
@@ -20,8 +20,6 @@
 				started_date = #{started_date},
 				predict_finished_date = #{predict_finished_date},
 				explanation = #{explanation},
-				complete_rate = #{complete_rate},
-				fixed_cost = #{fixed_cost},
 				required_time = #{required_time},
 				mini_project_id = #{mini_project_id}
 			where id = #{id};
@@ -31,7 +29,7 @@
 	<delete id="deleteTask" parameterType="java.lang.Integer">
 		<![CDATA[
 			delete from tasks
-			where id = #{id}
+			where id = #{task_id}
 		]]>
 	</delete>
 
@@ -45,28 +43,13 @@
 			started_date,
 			predict_finished_date,
 			explanation,
-			complete_rate,
-			fixed_cost,
 			required_time,
 			mini_project_id
 		from tasks
-		where id = #{id};
+		where id = #{task_id}
 	]]>
 	</select>
 
-	<resultMap type="com.todo.beans.Task" id="getTask">
-		<result property="id" column="id"></result>
-		<result property="task_title" column="task_title"></result>
-		<result property="status" column="status"></result>
-		<result property="priority" column="priority"></result>
-		<result property="started_date" column="started_date"></result>
-		<result property="predict_finished_date" column="predict_finished_date"></result>
-		<result property="explanation" column="explanation"></result>
-		<result property="complete_rate" column="complete_rate"></result>
-		<result property="fixed_cost" column="fixed_cost"></result>
-		<result property="required_time" column="required_time"></result>
-		<result property="mini_project_id" column="mini_project_id"></result>
-	</resultMap>
 
 	<select id ="getTaskList" parameterType="map" resultMap="getTask">
 	<![CDATA[
@@ -78,8 +61,6 @@
 			started_date,
 			predict_finished_date,
 			explanation,
-			complete_rate,
-			fixed_cost,
 			required_time,
 			mini_project_id
 		from tasks
@@ -102,4 +83,17 @@
 		order by ${param5} ${param6};
 	]]>
 	</select>
+
+	<resultMap type="com.todo.beans.Task" id="getTask">
+		<result property="id" column="id"></result>
+		<result property="task_title" column="task_title"></result>
+		<result property="status" column="status"></result>
+		<result property="priority" column="priority"></result>
+		<result property="started_date" column="started_date"></result>
+		<result property="predict_finished_date" column="predict_finished_date"></result>
+		<result property="explanation" column="explanation"></result>
+		<result property="required_time" column="required_time"></result>
+		<result property="mini_project_id" column="mini_project_id"></result>
+	</resultMap>
+
 </mapper>

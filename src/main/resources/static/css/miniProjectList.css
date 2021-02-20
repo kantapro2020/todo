@@ -1,0 +1,41 @@
+@charset "UTF-8";
+.main-right{
+	width:80%;
+	min-height:93vh;
+}
+
+.mini-projects{
+	width:100%;
+	border-bottom:1px solid black;
+}
+
+.mini-project-title{
+	font-size:30px;
+	border-bottom:1px solid black;
+	padding:20px 30px;
+}
+
+.search-form{
+	background-color:yellow;
+	padding:20px 0;
+	border-bottom:1px solid black;
+}
+
+.mini-project-list-title{
+	text-align:left;
+	font-size:20px;
+	line-height:30px;
+	border-bottom:1px solid black;
+}
+
+.mini-project-list-name{
+	text-align:left;
+	font-size:18px;
+	line-height:30px;
+	white-space: nowrap;
+}
+
+
+.font-black{
+	color:black;
+}

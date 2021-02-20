@@ -2,103 +2,106 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/css/reset.css}">
+<link rel="stylesheet" th:href="@{/css/header.css}">
+<link rel="stylesheet" th:href="@{/css/main-left.css}">
 <link rel="stylesheet" th:href="@{/css/project_detail.css}">
 <title>Insert title here</title>
 </head>
 <body>
-	<table>
-		<tr>
-			<td class="page-header font-pg-header">プロジェクトA</td>
-			<td class="page-header font-pg-header">蛭間寛太</td>
-			<td class="page-header font-pg-header">2021/01/01</td>
-		</tr>
-	</table>
+    <header>
+    	<div th:replace="header"></div>
+    </header>
 
-	<div class="miniproject-titles">
-		<h1 class="miniproject-title">ミニプロジェクトA</h1><h1><a class="insert-link" th:href="@{/registerTask}">タスク追加</a></h1>
-	</div>
-
-	<form th:action="@{/searchTask}" method="post">
-		<label>検索条件</label>
-		<input type="text" name="keyword">
-		<select name="status" />
-			<option value="100" selected="selected">ステータス</option>
-			<option value="0">保留</option>
-			<option value="1">開始前</option>
-			<option value="2">実行中</option>
-			<option value="3">完了</option>
-		</select>
-		<select name="priority">
-			<option value="100" selected="selected">優先度</option>
-			<option value="0">低</option>
-			<option value="1">中</option>
-			<option value="2">高</option>
-		</select>
-		<label>並び替え条件</label>
-		<select name="sort">
-			<option value="id">登録順</option>
-			<option value="status">ステータス</option>
-			<option value="priority">優先度</option>
-			<option value="started_date">開始日</option>
-			<option value="predict_finished_date">終了日</option>
-			<option value="complete_rate">完了率</option>
-			<option value="fixed_cost">固定費</option>
-			<option value="required_time">所要時間</option>
-		</select>
-		<select name="order">
-			<option value="Asc">昇順</option>
-			<option value="Desc">降順</option>
-		</select>
-		<input type="submit" value="検索">
-	</form>
-<!--   ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー -->
-	<div class="task-titles">
-		<span class="project-detail-title">プロジェクトの詳細</span><span class="project-progres-title">進捗</span><span class="project-progres-cost">費用／所要時間</span>
-	</div>
-	 <table th:object="${result}">
-		<tr>
-			<th class="task-width-200 margin-r table-title">タスク名</th>
-			<th class="task-width-80 margin-r table-title">ステータス</th>
-			<th class="task-width-80 margin-r table-title">優先度</th>
-			<th class="task-width-80 margin-r table-title">開始日</th>
-			<th class="task-width-80 margin-r table-title">終了日</th>
-			<th class="task-width-150 margin-r table-title">担当者</th>
-			<th class="task-width-200 margin-r table-title">説明</th>
-			<th class="task-width-80 margin-r table-title">完了率</th>
-			<th class="task-width-200 margin-r table-title">固定費</th>
-			<th class="task-width-80 margin-r table-title">時間(m)</th>
-		</tr>
-
-		<tr th:if="${result}" th:each="task:${result}">
-			<td class="task-width-200 margin-r" th:text="${task.task_title}"></td>
-			<td class="task-width-80 margin-r" th:switch="${task.status}">
-				<span th:case="0">保留</span>
-				<span th:case="1">開始前</span>
-				<span th:case="2">実行中</span>
-				<span th:case="3">完了</span>
-				<span th:case="*">対象無し</span>
-			</td>
-			<td class="task-width-80 margin-r" th:switch="${task.priority}">
-				<span th:case="0">低</span>
-				<span th:case="1">中</span>
-				<span th:case="2">高</span>
-				<span th:case="*">対象なし</span>
-			</td>
-			<td class="task-width-80 margin-r" th:text="${task.started_date}"></td>
-			<td class="task-width-80 margin-r"  th:text="${task.predict_finished_date}"></td>
-			<td class="task-width-150 margin-r">金澤伸行</td>
-			<td class="task-width-200 margin-r" th:text="${task.explanation}"></td>
-			<td class="task-width-80 margin-r" th:text="${task.complete_rate}"></td>
-			<td class="task-width-200 margin-r" th:text="${task.fixed_cost}"></td>
-			<td class="task-width-80 margin-r" th:text="${task.required_time}"></td>
-			<td><a th:href="@{/updateTask/{id}(id=${task.id})}">編集</a></td>
-			<td>
-				<form th:action="@{/deleteTask/{id}(id=${task.id})}" method="post">
-					<input type="submit" value="削除">
-				</form>
-			</td>
-
-	  	</tr>
-	</table>
+	<div class="main">
+	    <div class="main-left">
+		    <div class="userdatas">
+				<h1 class="userdata">Y&I Group</h1>
+				<h1 class="userdata">蛭間寛太</h1>
+		    </div>
+			<div class="list"  th:object="${mini_projexts}">
+				<h1 class="list-title">プロジェクトA</h1>
+				<p  th:each="mini_project:${mini_projects}"><a th:text="${mini_project.mini_project_title}" class="list-name"  th:href="@{/{project_id}/project_detail/{mini_project_id} (project_id=1,mini_project_id=${mini_project.id})}"></a></p>
+			</div>
+	    </div>
+		<div class="main-right">
+			<div class="project-titles" th:object="${mini_project}">
+				<h1 class="project-title" >プロジェクト名 ＞ ミニプロジェクト名 ＞ <span th:text="${mini_project.mini_project_title}"></span></h1>
+				<a class="add-task" th:href="@{/{project_id}/{mini_project_id}/registerTask(project_id=1, mini_project_id=${mini_project.id})}">タスク追加</a>
+			</div>
+			<form class="search-form" th:object="${mini_project}" th:action="@{/searchTask/{mini_project_id}(mini_project_id=${mini_project_id})}" method="post" >
+				<label>絞り込み</label>
+				<input type="text" name="keyword">
+				<select name="status" />
+					<option value="100" selected="selected">ステータス</option>
+					<option value="0">保留</option>
+					<option value="1">開始前</option>
+					<option value="2">実行中</option>
+					<option value="3">完了</option>
+				</select>
+				<select name="priority">
+					<option value="100" selected="selected">優先度</option>
+					<option value="0">低</option>
+					<option value="1">中</option>
+					<option value="2">高</option>
+				</select>
+				<label>並び替え条件</label>
+				<select name="sort">
+					<option value="id">登録順</option>
+					<option value="status">ステータス</option>
+					<option value="priority">優先度</option>
+					<option value="started_date">開始日</option>
+					<option value="predict_finished_date">終了日</option>
+					<option value="required_time">所要日数</option>
+				</select>
+				<select name="order">
+					<option value="Asc">昇順</option>
+					<option value="Desc">降順</option>
+				</select>
+				<input type="submit" value="検索">
+			</form>
+			 <table class="tasks" th:object="${taskList}">
+ 				<tr>
+					<th class="task-list-title"></th>
+					<th class="task-list-title">タスク名</th>
+					<th class="task-list-title">ステータス</th>
+					<th class="task-list-title">優先度</th>
+					<th class="task-list-title">開始日</th>
+					<th class="task-list-title">終了日</th>
+					<th class="task-list-title">説明</th>
+					<th class="task-list-title">所要日数</th>
+					<th class="task-list-title"></th>
+				</tr>
+				<tr class="table-data" th:if="${taskList}" th:each="task:${taskList}">
+					<td class="task-list-name">
+					<td class="task-list-name delete-decoration"><a th:object="${mini_project}" th:text="${task.task_title}" th:href="@{/{project_id}/{mini_project_id}/updateTask/{task_id}(project_id=1, mini_project_id=${mini_project.id}, task_id=${task.id})}"></a></td>
+					<td class="task-list-name" th:switch="${task.status}">
+						<span th:case="0">保留</span>
+						<span th:case="1">開始前</span>
+						<span th:case="2">実行中</span>
+						<span th:case="3">完了</span>
+						<span th:case="*">対象無し</span>
+					</td>
+					<td class="task-list-name" th:switch="${task.priority}">
+						<span th:case="0">低</span>
+						<span th:case="1">中</span>
+						<span th:case="2">高</span>
+						<span th:case="*">対象なし</span>
+					</td>
+					<td class="task-list-name" th:text="${task.started_date}"></td>
+					<td class="task-list-name" th:text="${task.predict_finished_date}"></td>
+					<td class="task-list-name" th:text="${task.explanation}"></td>
+<!-- 					<td class="task-width-80 margin-r" th:text="${task.complete_rate}"></td>
+					<td class="task-width-80 margin-r" th:text="${task.fixed_cost}"></td> -->
+					<td class="task-list-name" th:text="${task.required_time}"></td>
+					<td class="task-list-name">
+						<form th:action="@{/{project_id}/deleteTask/{mini_project_id}/{task_id}(project_id=1, mini_project_id=${mini_project_id},task_id=${task.id})}" method="post">
+							<input type="submit" value="削除">
+						</form>
+					</td>
+			  	</tr>
+			</table>
+		</div>
+	 <div>
   </body>
 </html>
