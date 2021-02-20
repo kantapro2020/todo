@@ -1,0 +1,46 @@
+@charset "UTF-8";
+
+.main{
+	display:flex;
+
+}
+
+.main-left{
+	min-height:93vh;
+	width:20%;
+	background-color:gray;
+	border-right:1px solid white;
+}
+
+.userdatas{
+	margin:20px;
+}
+
+.userdata{
+	color:white;
+	text-align:center;
+	font-size:30px;
+	line-height:50px;
+}
+
+.list{
+	width:90%;
+	margin:0 auto;
+	text-align:center;
+	border-top:1px solid white;
+}
+
+.list-title{
+	color:white;
+	text-align:center;
+	font-size:25px;
+	margin:20px 0;
+}
+
+.list-name{
+	color:white;
+	text-decoration:none;
+	font-size:20px;
+	line-height:30px;
+}
+

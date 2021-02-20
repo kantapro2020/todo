@@ -32,13 +32,6 @@ public class Task implements Serializable {
         @Size(max=50)
         private String explanation;
         @Null
-        @Min(0)
-        @Max(100)
-        private int complete_rate;
-        @Null
-        @Min(0)
-        private int fixed_cost ;
-        @Null
         @Min(1)
         private  int required_time;
         @Null
@@ -110,30 +103,6 @@ public class Task implements Serializable {
          */
         public void setExplanation(String explanation) {
             this.explanation = explanation;
-        }
-        /**
-         * @return complete_rate
-         */
-        public int getComplete_rate() {
-            return complete_rate;
-        }
-        /**
-         * @param complete_rate セットする complete_rate
-         */
-        public void setComplete_rate(int complete_rate) {
-            this.complete_rate = complete_rate;
-        }
-        /**
-         * @return fixed_cost
-         */
-        public int getFixed_cost() {
-            return fixed_cost;
-        }
-        /**
-         * @param fixed_cost セットする fixed_cost
-         */
-        public void setFixed_cost(int fixed_cost) {
-            this.fixed_cost = fixed_cost;
         }
         /**
          * @return required_time
