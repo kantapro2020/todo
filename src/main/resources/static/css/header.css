@@ -21,6 +21,15 @@ header {
 .header-link{
 	margin-left:20px;
 }
+.header-form{
+	display:inline-block;
+}
+.header-button{
+	background-color:black;
+	color:white;
+	border:none;
+	outline:none;
+}
 
 .delete-decoration{
   text-decoration: none;

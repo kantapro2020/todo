@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>従業員登録</h1>
+		<form th:action="@{/userRegistration}" method="post" th:object="${userRegistrationBean}">
+			<label for="username">Username</label>
+			<input type="text" th:field="*{username}"><br/>
+			<div th:if="${duplicateError}">
+				<span th:text="${duplicateError}"></span>
+			</div>
+			<div th:if="${#fields.hasErrors('username')}">
+				<span th:errors="*{username}"></span>
+			</div>
+
+			<label for="password">Password</label>
+			<input type="password" th:field="*{password}"><br/>
+			<div th:if="${#fields.hasErrors('password')}">
+				<span th:errors="*{password}"></span>
+			</div>
+
+			<label for="password">Password_Conf</label>
+			<input type="password" th:field="*{password_conf}"><br/>
+			<div th:if="${#fields.hasErrors('passwordConfirmed')}">
+				<span th:errors="*{passwordConfirmed}"></span>
+			</div>
+
+			<label for="company"> 企業</label>
+			<select th:field="*{company_id}">
+				<option value=1>Y%I Group</option>
+			</select><br/>
+			<div th:if="${#fields.hasErrors('company_id')}">
+				<span th:errors="*{company_id}"></span>
+			</div>
+
+
+			<input type="submit" value="Register">
+		</form>
+		<a th:href="@{/login}"> ログイン</a>
+</body>
+</html>

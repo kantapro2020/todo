@@ -6,7 +6,6 @@ import java.sql.Date;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Null;
 import javax.validation.constraints.Size;
 
 
@@ -16,25 +15,18 @@ public class Task implements Serializable {
         @NotEmpty
         @Size(max = 20)
         private String task_title;
-        @Null
         @Min(0)
         @Max(3)
         private int status;
-        @Null
         @Min(0)
         @Max(2)
         private int priority;
-        @Null
         private Date started_date;
-        @Null
         private Date predict_finished_date;
-        @Null
         @Size(max=50)
         private String explanation;
-        @Null
         @Min(1)
         private  int required_time;
-        @Null
         private int mini_project_id;
 
         public String getTask_title() {

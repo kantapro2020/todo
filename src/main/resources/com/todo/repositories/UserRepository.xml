@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.todo.repositories.UserRepository">
+
+	<insert id ="registerUser" parameterType="com.todo.beans.User" useGeneratedKeys="true" keyProperty="id">
+	<![CDATA[
+		insert into users
+		(user_name, password, delete_flg, created_at, company_id)
+		values
+		(#{username} , #{password}, #{delete_flg}, #{created_at},1);
+	]]>
+	</insert>
+
+	<insert id ="registerUserRole" parameterType="com.todo.beans.User">
+		<![CDATA[
+			insert into user_role (user_id, role_id)values (#{id}, 1)
+		]]>
+	</insert>
+
+
+	<select id="identifyUser" parameterType="java.lang.String" resultMap="userDetails" >
+	<![CDATA[
+		select
+			users.id,
+			users.user_name,
+			users.password,
+			users.delete_flg,
+			users.created_at,
+			users.updated_at,
+			users.company_id,
+			roles.role_name
+		from Users
+		join user_role on users.id = user_role.user_id
+		join roles on user_role.role_id = roles.id
+		where users.user_name = #{username};
+	]]>
+
+	</select>
+	<resultMap type="com.todo.beans.User" id="userDetails">
+		<result property="id" column="ID"></result>
+		<result property="username" column="user_name"></result>
+		<result property="password" column="PASSWORD"></result>
+		<result property="delete_flg" column="delete_flg"></result>
+		<result property="created_at" column="created_at"></result>
+		<result property="updated_at" column="updated_at"></result>
+		<result property="company_id" column="company_at"></result>
+		<collection property="roles" ofType="java.lang.String">
+			<result column="ROLE_NAME"></result>
+		</collection>
+	</resultMap>
+
+	<select id="getAllUser" resultMap="getAllUser">
+		<![CDATA[
+			select
+				users.id,
+				users.email,
+				users.username,
+				departments.department,
+				projects.project
+			from Users
+			join user_role on users.id = user_role.user_id
+			join roles on user_role.role_id = roles.id
+			join user_department on users.id = user_department.user_id
+			join departments on user_department.department_id = departments.id
+			join user_project on users.id = user_project.user_id
+			join projects on user_project.project_id = projects.id
+		]]>
+	</select>
+	<resultMap type="com.todo.beans.User" id="getAllUser">
+		<result property="id" column="ID"></result>
+		<result property="email" column="EMAIL"></result>
+		<result property="username" column="USERNAME"></result>
+		<result property="entrance_date" column="ENTRANCE_DATE"></result>
+		<result property="department" column="DEPARTMENT"></result>
+		<result property="project" column="PROJECT"></result>
+	</resultMap>
+
+	<select id="getUser" parameterType="java.lang.Integer" resultMap="getUser">
+		<![CDATA[
+			select
+				users.id,
+				users.email,
+				users.username,
+				departments.department,
+				projects.project
+			from Users
+			join user_role on users.id = user_role.user_id
+			join roles on user_role.role_id = roles.id
+			join user_department on users.id = user_department.user_id
+			join departments on user_department.department_id = departments.id
+			join user_project on users.id = user_project.user_id
+			join projects on user_project.project_id = projects.id
+			where users.id = #{id};
+		]]>
+	</select>
+	<resultMap type="com.todo.beans.User" id="getUser">
+		<result property="id" column="ID"></result>
+		<result property="email" column="EMAIL"></result>
+		<result property="username" column="USERNAME"></result>
+		<result property="entrance_date" column="ENTRANCE_DATE"></result>
+		<result property="department" column="DEPARTMENT"></result>
+		<result property="project" column="PROJECT"></result>
+	</resultMap>
+</mapper>

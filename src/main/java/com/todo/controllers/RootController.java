@@ -1,10 +1,16 @@
 package com.todo.controllers;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
 
+import javax.validation.Valid;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,15 +19,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.todo.beans.Project;
 import com.todo.beans.Task;
+import com.todo.beans.User;
+import com.todo.beans.UserRegistrationBean;
 import com.todo.repositories.MiniProjectRepository;
 import com.todo.repositories.ProjectRepository;
 import com.todo.repositories.TaskRepository;
+import com.todo.repositories.UserRepository;
+import com.todo.services.GetUserDataService;
 import com.todo.services.MiniProjectService;
 import com.todo.services.TaskService;
+import com.todo.services.UserRegistrationService;
 
 @Controller
 public class RootController {
@@ -29,13 +41,72 @@ public class RootController {
     TaskRepository taskRepository;
     @Autowired
     MiniProjectRepository miniProjectRepository;
+//    蛭間記述
+    @Autowired
+    ProjectRepository projectRepository;
+    @Autowired
+    UserRepository userRepository;
     @Autowired
     TaskService taskService;
     @Autowired
     MiniProjectService miniProjectService;
-//    蛭間記述
     @Autowired
-    ProjectRepository projectRepository;
+    UserRegistrationService userRegistrationService;
+    @Autowired
+    GetUserDataService getUserDataService;
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+
+    @PostMapping("/login")
+    public String loginUser() {
+        return "index";
+    }
+
+    @PostMapping("/login-error")
+    public String loginError(@RequestAttribute("SPRING_SECURITY_LAST_EXCEPTION") AuthenticationException ex,
+            Model model) {
+        model.addAttribute("authenticationException", ex);
+        return "login";
+    }
+
+    @GetMapping("/userRegistration")
+    public String userRegistration(Model model) {
+        model.addAttribute("userRegistrationBean", new UserRegistrationBean());
+        return "userRegistration";
+    }
+
+    @PostMapping("/userRegistration")
+    public String registrationUser(@Valid @ModelAttribute UserRegistrationBean userRegistrationBean,
+            BindingResult bindingResult,
+            Model model) {
+
+        if (bindingResult.hasErrors()) {
+            return "userRegistration";
+        }
+
+        if (userRegistrationService.isDuplicateUser(userRegistrationBean.getUsername())) {
+            model.addAttribute("duplicateError", "すでに使われているEmailです");
+            return "userRegistration";
+        }
+
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        String created_at = sdf.format(calendar.getTime());
+
+        User user = new User();
+        user.setUsername(userRegistrationBean.getUsername());
+        user.setPassword(passwordEncoder.encode(userRegistrationBean.getPassword()));
+        user.setUsername(userRegistrationBean.getUsername());
+        user.setCreated_at(created_at);
+        userRegistrationService.registerUser(user);
+
+        return "login";
+    }
 
     @RequestMapping("/")
     public String root(Model model) {
@@ -76,10 +147,8 @@ public class RootController {
     }
 
     @PostMapping("/{project_id}/{mini_project_id}//updateTask/{task_id}")
-    public String updateTask(@PathVariable("project_id") int project_id,@PathVariable("mini_project_id") int mini_project_id, @PathVariable("task_id") int task_id,@Validated Task task ,BindingResult bindingResult,  Model model) {
+    public String updateTask(@Validated Task task ,BindingResult bindingResult,  Model model,@PathVariable("project_id") int project_id,@PathVariable("mini_project_id") int mini_project_id, @PathVariable("task_id") int task_id) {
         taskRepository.updateTask(task);
-//        taskService.setTaskList(model, mini_project_id);
-//        miniProjectService.setMiniProject(model, mini_project_id);
         return "redirect:/{project_id}/project_detail/{mini_project_id}";
     }
 

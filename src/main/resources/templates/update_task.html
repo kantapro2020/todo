@@ -11,16 +11,12 @@
 </head>
 <body th:object="${msg}">
 	<header>
-      <h2><a class="header-title delete-decoration" href="/">TaskManager</a></h2>
-      <div class="header-right">
-        <a class="header-link delete-decoration" href="#">top</a>
-        <a class="header-link delete-decoration" href="#">ログアウト</a>
-      </div>
+    	<div th:replace="header"></div>
     </header>
 	<div class="main">
 	    <div class="main-left">
 		    <div class="userdatas">
-				<h1 class="userdata">Y&I Group</h1>
+				<h1 class="userdata">Y and I Group</h1>
 				<h1 class="userdata">蛭間寛太</h1>
 		    </div>
 		    <div class="list"  th:object="${mini_projexts}">
@@ -30,35 +26,34 @@
 	    </div>
 		<div class="main-right" th:object="${mini_project}">
 			<h1 class="page-title">タスク詳細／更新</h1>
-				<form class="form" th:object="${task}" th:action="@{/{project_id}/{mini_project_id}/updateTask/{task_id}(project_id=1,mini_project_id=${mini_project.id},task_id=${task.id})}" method ="post">
-					<span class="form-title">タスク名</span>
-					<input class="form-input" type="text" th:field="${task.task_title}">
-					<span class="form-title">ステータス</span>
-					<select class="form-input" th:field="${task.status}" id="">
-						<option value="0">保留</option>
-						<option value="1">開始前</option>
-						<option value="2">実行中</option>
-						<option value="3">完了</option>
-					</select>
-					<span class="form-title">優先度</span>
-					<select class="form-input" th:field="${task.priority}" id="">
-						<option value="0">低</option>
-						<option value="1">中</option>
-						<option value="2">高</option>
-					</select>
-					<span class="form-title">開始日</span>
-					<input class="form-input" type="date" th:field="${task.started_date}" id="">
-					<span class="form-title">終了予定日</span>
-					<input class="form-input" type="date" th:field="${task.predict_finished_date}" id="">
-					<span class="form-title">説明</span>
-					<textarea class="form-input"  th:field="${task.explanation}" id="" cols="20" rows="5"></textarea>
-					<span class="form-title">所要日数</span>
-					<input class="form-input" type="number" th:field="${task.required_time}" min="1">
-					<span class="form-title"></span>
-					<input  th:object="${now}" class="form-input submit-button" type="submit" value="登録">
-				</form>
-			</div>
-
+			<form class="form" th:object="${task}" th:action="@{/{project_id}/{mini_project_id}/updateTask/{task_id}(project_id=1,mini_project_id=${mini_project.id},task_id=${task.id})}" method ="post">
+				<input type="hidden" th:field="${task.id}">
+				<span class="form-title">タスク名</span>
+				<input class="form-input" type="text" th:field="${task.task_title}">
+				<span class="form-title">ステータス</span>
+				<select class="form-input" th:field="${task.status}" id="">
+					<option value="0">保留</option>
+					<option value="1">開始前</option>
+					<option value="2">実行中</option>
+					<option value="3">完了</option>
+				</select>
+				<span class="form-title">優先度</span>
+				<select class="form-input" th:field="${task.priority}" id="">
+					<option value="0">低</option>
+					<option value="1">中</option>
+					<option value="2">高</option>
+				</select>
+				<span class="form-title">開始日</span>
+				<input class="form-input" type="date" th:field="${task.started_date}" id="">
+				<span class="form-title">終了予定日</span>
+				<input class="form-input" type="date" th:field="${task.predict_finished_date}" id="">
+				<span class="form-title">説明</span>
+				<textarea class="form-input"  th:field="${task.explanation}" id="" cols="20" rows="5"></textarea>
+				<span class="form-title">所要日数</span>
+				<input class="form-input" type="number" th:field="${task.required_time}" min="1">
+				<span class="form-title"></span>
+				<input  th:object="${now}" class="form-input submit-button" type="submit" value="登録">
+			</form>
 		</div>
 	</div>
 </body>

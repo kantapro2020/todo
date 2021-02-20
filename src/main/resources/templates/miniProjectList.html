@@ -10,11 +10,7 @@
 </head>
 <body>
 	<header>
-      <h2><a class="header-title delete-decoration" href="/">TaskManager</a></h2>
-      <div class="header-right">
-        <a class="header-link delete-decoration" href="#">top</a>
-        <a class="header-link delete-decoration" href="#">ログアウト</a>
-      </div>
+    	<div th:replace="header"></div>
     </header>
 
 	<div class="main">
@@ -57,8 +53,6 @@
 					<option value="priority">優先度</option>
 					<option value="started_date">開始日</option>
 					<option value="predict_finished_date">終了日</option>
-<!-- 					<option value="complete_rate">完了率</option>
-					<option value="fixed_cost">固定費</option> -->
 					<option value="required_time">所要日数</option>
 				</select>
 				<select name="order">
