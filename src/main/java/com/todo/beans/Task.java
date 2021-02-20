@@ -5,36 +5,44 @@ import java.sql.Date;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Null;
 import javax.validation.constraints.Size;
 
-import org.springframework.lang.NonNull;
 
 public class Task implements Serializable {
         private static final long serialVersionUID = -41353466463452342L;
         private int id;
-        @Size(min = 1, max = 20)
+        @NotEmpty
+        @Size(max = 20)
         private String task_title;
+        @Null
         @Min(0)
         @Max(3)
         private int status;
+        @Null
         @Min(0)
         @Max(2)
         private int priority;
-        @NonNull
+        @Null
         private Date started_date;
-        @NonNull
+        @Null
         private Date predict_finished_date;
-        @Size(min = 1, max=50)
+        @Null
+        @Size(max=50)
         private String explanation;
+        @Null
         @Min(0)
         @Max(100)
         private int complete_rate;
+        @Null
+        @Min(0)
         private int fixed_cost ;
+        @Null
         @Min(1)
         private  int required_time;
-        @Min(1)
+        @Null
         private int mini_project_id;
-//        private User user;
 
         public String getTask_title() {
             return task_title;
