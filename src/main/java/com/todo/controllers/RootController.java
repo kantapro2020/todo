@@ -15,17 +15,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.todo.beans.Project;
 import com.todo.beans.Task;
+import com.todo.beans.User;
+import com.todo.beans.UserProject;
 import com.todo.repositories.ProjectRepository;
 import com.todo.repositories.TaskRepository;
+import com.todo.repositories.UserProjectRepository;
+import com.todo.repositories.UserRepository;
 
 @Controller
 public class RootController {
 
     @Autowired
     TaskRepository taskRepository;
-//    蛭間記述
     @Autowired
     ProjectRepository projectRepository;
+    @Autowired
+    UserProjectRepository userProjectRepository;
+    @Autowired
+    UserRepository userRepository;
 
     @RequestMapping("/")
     public String root(Model model) {
@@ -86,27 +93,66 @@ public class RootController {
     }
 
 
-    @GetMapping("/registerProject")
+
+//    蛭間記載
+//    プロジェクト一覧
+    @GetMapping("/projectList")
     public String getProjectList(Model model) {
-    	LinkedList<Project> projects = projectRepository.getProjectList(1);
+    	LinkedList<Project> projects = projectRepository.getProjectList(3);
         model.addAttribute("projects",projects);
     	return "project_list";
     }
+<<<<<<< Updated upstream
+=======
 //    public String registerProject(Model model) {
 //        model.addAttribute("projectBean", new Project());
 //        model.addAttribute("now", new Date());
 //        return "project_list";
 //    }
-    
 
+>>>>>>> Stashed changes
+
+
+//    プロジェクト登録
+    @GetMapping("/registerProject")
+    public String project(Model model) {
+
+    	LinkedList <User> users = userRepository.getUserList(1);
+    	for (User user : users) {
+    		System.out.println(user.getUser_name());
+    	}
+    	model.addAttribute("projectBean", new Project());
+    	model.addAttribute("userProjectBean", new UserProject());
+    	model.addAttribute("now", new Date());
+    	model.addAttribute("users", users);
+    	return "register_project";
+    }
+
+//		POST
     @PostMapping("/registerProject")
-    public String registerProject(@ModelAttribute Project project, Model model) {
+<<<<<<< Updated upstream
+    public String registerProject(@ModelAttribute Project project,@ModelAttribute LinkedList<UserProject> recordList, Model model) {
+=======
+    public String registerProject(Project project, Model model) {
+>>>>>>> Stashed changes
         projectRepository.registerProject(project);
         LinkedList<Project> projects = projectRepository.getProjectList(1);
         model.addAttribute("project", projects);
+
+        userProjectRepository.insertUserProject(recordList);
+        LinkedList<UserProject> userProjects = new LinkedList<>();
+    	UserProject userProject =new UserProject();
+    	userProject.setProject_id(3);
+    	userProject.setUser_id(1);
+    	userProjects.add(userProject);
+    	userProject =new UserProject();
+    	userProject.setProject_id(3);
+    	userProject.setUser_id(2);
+    	userProjects.add(userProject);
+    	model.addAttribute("userProject", userProjects);
         return "project_list";
     }
 
 
-    
+
 }
