@@ -7,29 +7,42 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.ForwardAuthenticationFailureHandler;
+
+import com.todo.services.DatabaseUserDetailsService;
+
+
 
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    PasswordEncoder PasswordEncoder;
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        // TODO 自動生成されたメソッド・スタブ
-        auth.inMemoryAuthentication().withUser("user").password(passwordEncoder().encode("password")).roles("USER");
-    }
-
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        // TODO 自動生成されたメソッド・スタブ
-        http.authorizeRequests().antMatchers("/todo/src/main/resources/css/project_detail.css").permitAll()
-        .anyRequest().authenticated()
-        .and().formLogin();
-    }
+    DatabaseUserDetailsService databaseUserDetailsService;
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(databaseUserDetailsService).passwordEncoder(passwordEncoder());
+    }
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests()
+                .antMatchers("/css/**").permitAll()
+                .antMatchers("/userRegistration").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .formLogin()
+                .loginPage("/login").usernameParameter("username").passwordParameter("password").permitAll()
+                .failureHandler(new ForwardAuthenticationFailureHandler("/login-error"))
+                .and()
+                .logout().logoutUrl("/logout").invalidateHttpSession(true).deleteCookies("JSESSIONID");
     }
 
 }

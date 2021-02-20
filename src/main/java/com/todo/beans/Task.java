@@ -6,7 +6,6 @@ import java.sql.Date;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Null;
 import javax.validation.constraints.Size;
 
 
@@ -16,32 +15,18 @@ public class Task implements Serializable {
         @NotEmpty
         @Size(max = 20)
         private String task_title;
-        @Null
         @Min(0)
         @Max(3)
         private int status;
-        @Null
         @Min(0)
         @Max(2)
         private int priority;
-        @Null
         private Date started_date;
-        @Null
         private Date predict_finished_date;
-        @Null
         @Size(max=50)
         private String explanation;
-        @Null
-        @Min(0)
-        @Max(100)
-        private int complete_rate;
-        @Null
-        @Min(0)
-        private int fixed_cost ;
-        @Null
         @Min(1)
         private  int required_time;
-        @Null
         private int mini_project_id;
 
         public String getTask_title() {
@@ -110,30 +95,6 @@ public class Task implements Serializable {
          */
         public void setExplanation(String explanation) {
             this.explanation = explanation;
-        }
-        /**
-         * @return complete_rate
-         */
-        public int getComplete_rate() {
-            return complete_rate;
-        }
-        /**
-         * @param complete_rate セットする complete_rate
-         */
-        public void setComplete_rate(int complete_rate) {
-            this.complete_rate = complete_rate;
-        }
-        /**
-         * @return fixed_cost
-         */
-        public int getFixed_cost() {
-            return fixed_cost;
-        }
-        /**
-         * @param fixed_cost セットする fixed_cost
-         */
-        public void setFixed_cost(int fixed_cost) {
-            this.fixed_cost = fixed_cost;
         }
         /**
          * @return required_time

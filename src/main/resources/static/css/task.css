@@ -1,37 +1,35 @@
-
-.input-title{
-    display: inline-block;
-    width: 150px;
-    text-align: right;
-    color: rgb(7, 26, 2);
-    /* margin-right:50px; */
+@charset "UTF-8";
+.main-right{
+	width:80%;
+	min-height:93vh;
 }
 
-.omatome{
-
-    text-align: center;
+.page-title{
+	padding:20px 0;
+	border-bottom:1px solid black;
+	font-size:30px;
+	text-align:center;
 }
 
-.input{
-    width: 200px;
-}
 
-.button{
-    margin-top: 20px;
+.form{
+	margin:0 auto;
+	width:600px;
 
-}
-
-.lock{
-
-    resize: none;
 
 }
-
-.tanni{
-    display: inline-block;
-    width: 30px;
+.form-title{
+	font-size:15px;
+	line-height:25px;
+	display:block;
 }
 
-.text-right{
-    text-align: right;
+.form-input{
+	width:600px;
+	font-size:12px;
+	box-sizing:border-box;
+}
+
+.submit-button{
+	margin-top:20px;
 }
