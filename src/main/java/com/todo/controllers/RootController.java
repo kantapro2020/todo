@@ -47,14 +47,6 @@ import com.todo.services.UserRegistrationService;
 public class RootController {
     @Autowired
     TaskRepository taskRepository;
-
-    @Autowired
-    ProjectRepository projectRepository;
-    @Autowired
-    UserProjectRepository userProjectRepository;
-    @Autowired
-    UserRepository userRepository;
-
     @Autowired
     MiniProjectRepository miniProjectRepository;
 //    蛭間記述

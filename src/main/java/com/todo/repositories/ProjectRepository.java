@@ -17,5 +17,4 @@ public interface ProjectRepository {
 	public Project getProject(int id);
 	public LinkedList<Project> getProjectList(int company_id);
 	public LinkedList<User> getUserList(int id);
-	public int insertUserProject(LinkedList<UserProject> recordList);
 }

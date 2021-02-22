@@ -12,18 +12,8 @@
     <header>
     	<div th:replace="header"></div>
     </header>
-
 	<div class="main">
-	    <div class="main-left">
-		    <div class="userdatas">
-				<h1 class="userdata">Y&I Group</h1>
-				<h1 class="userdata">蛭間寛太</h1>
-		    </div>
-			<div class="list"  th:object="${mini_projexts}">
-				<h1 class="list-title">プロジェクトA</h1>
-				<p  th:each="mini_project:${mini_projects}"><a th:text="${mini_project.mini_project_title}" class="list-name"  th:href="@{/{project_id}/project_detail/{mini_project_id} (project_id=1,mini_project_id=${mini_project.id})}"></a></p>
-			</div>
-	    </div>
+		<div th:replace="main-left"></div>
 		<div class="main-right">
 			<div class="project-titles" th:object="${mini_project}">
 				<h1 class="project-title" >プロジェクト名 ＞ ミニプロジェクト名 ＞ <span th:text="${mini_project.mini_project_title}"></span></h1>
@@ -102,6 +92,6 @@
 			  	</tr>
 			</table>
 		</div>
-	 <div>
+	 </div>
   </body>
 </html>
