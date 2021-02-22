@@ -190,6 +190,13 @@ public class RootController {
         model.addAttribute("projects",projects);
     	return "project_list";
     }
+//    public String registerProject(Model model) {
+//        model.addAttribute("projectBean", new Project());
+//        model.addAttribute("now", new Date());
+//        return "project_list";
+//    }
+
+
 
     @PostMapping("/registerProject")
     public String registerProject(@ModelAttribute Project project, Model model) {
