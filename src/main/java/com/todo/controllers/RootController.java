@@ -25,17 +25,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.todo.beans.Project;
 import com.todo.beans.Task;
 import com.todo.beans.User;
-
 import com.todo.beans.UserProject;
-import com.todo.repositories.ProjectRepository;
-import com.todo.repositories.TaskRepository;
-import com.todo.repositories.UserProjectRepository;
-import com.todo.repositories.UserRepository;
-
 import com.todo.beans.UserRegistrationBean;
 import com.todo.repositories.MiniProjectRepository;
 import com.todo.repositories.ProjectRepository;
 import com.todo.repositories.TaskRepository;
+import com.todo.repositories.UserProjectRepository;
 import com.todo.repositories.UserRepository;
 import com.todo.services.GetUserDataService;
 import com.todo.services.MiniProjectService;
@@ -47,6 +42,14 @@ import com.todo.services.UserRegistrationService;
 public class RootController {
     @Autowired
     TaskRepository taskRepository;
+
+    @Autowired
+    ProjectRepository projectRepository;
+    @Autowired
+    UserProjectRepository userProjectRepository;
+    @Autowired
+    UserRepository userRepository;
+
     @Autowired
     MiniProjectRepository miniProjectRepository;
 //    蛭間記述
