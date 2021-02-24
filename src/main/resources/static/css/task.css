@@ -1,6 +1,6 @@
 @charset "UTF-8";
 .main-right{
-	width:80%;
+	width:100%;
 	min-height:93vh;
 }
 
@@ -19,17 +19,24 @@
 
 }
 .form-title{
-	font-size:15px;
-	line-height:25px;
+	font-size:20px;
+	line-height:40px;
 	display:block;
 }
 
 .form-input{
 	width:600px;
-	font-size:12px;
+	font-size:17px;
 	box-sizing:border-box;
 }
 
 .submit-button{
 	margin-top:20px;
+}
+
+.link{
+	display:block;
+	text-align:center;
+	line-height:50px;
+	font-size:20px;
 }

@@ -1,19 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
     <title>ヘッダー</title>
-    <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+    <script type="text/javascript" th:inline="javascript" th:src="@{/js/script.js}"> </script>
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
   </head>
     <body>
-      <h2><a class="header-title delete-decoration" href="/">TaskManager</a></h2>
-      <div class="header-right">
-        <a class="header-link delete-decoration" href="#">top</a>
-         <form class="header-form" th:action="@{/logout}" method="post">
-        	<input class="header-button"type="submit" value="ログアウト">
-        </form>
-      </div>
+	   	<header>
+	      <p id="btn" class="fas fa-align-justify" onclick="clickBtn()"></p>
+	      <h2><a class="header-title delete-decoration" href="/">TaskManager</a></h2>
+	      <div class="header-right">
+	        <a class="header-link delete-decoration" href="#">top</a>
+	         <form class="header-form" th:action="@{/logout}" method="post">
+	        	<input class="header-button"type="submit" value="ログアウト">
+	        </form>
+	      </div>
+
+	    </header>
     </body>
 </html>

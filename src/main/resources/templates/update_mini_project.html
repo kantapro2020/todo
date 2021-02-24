@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/css/header.css}">
+<link rel="stylesheet" th:href="@{/css/reset.css}">
+<link rel="stylesheet" th:href="@{/css/main-left.css}">
+<link rel="stylesheet" th:href="@{/css/task.css}">
+<title>Insert title here</title>
+</head>
+<body>
+	<div th:include="header"></div>
+	<div class="main">
+		<div th:include="main-left"></div>
+		<h1 class="page-title">ミニプロジェクト更新</h1>
+		<form class="form" th:action="@{/{project_id}/updateMiniProject/{mini_project_id}(project_id=${mini_project.project_id},mini_project_id=${mini_project.id})}" method="post" th:object="${mini_project}">
+			<span class="form-title">ミニプロジェクト名</span>
+			<input class="form-input" type="text" th:field="${mini_project.mini_project_title}"><br>
+			<span class="form-title">ユーザー</span>
+			<input type="radio" th:field="${mini_project.user_id}" th:value="1" th:text="user">
+			<input type="radio" th:field="${mini_project.user_id}" th:value="2" th:text="user1">
+		 	<input type="hidden" th:field="${mini_project.project_id}" th:value="${project_id}">
+		 	<input type="hidden" th:field="${mini_project.id}" th:value="${id}">
+			<input class="form-input submit-button" type="submit" value="追加">
+		</form>
+
+	</div>
+</body>
+</html>
