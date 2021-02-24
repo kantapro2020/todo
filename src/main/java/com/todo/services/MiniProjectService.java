@@ -23,8 +23,16 @@ public class MiniProjectService {
     }
 
     public void setMiniProjectList(Model model, int project_id) {
+       int  user_id = 100;
+       String sort = "id";
+       String order = "Asc";
+        LinkedList<MiniProject> mini_projects =  miniProjectRepository.getMiniProjectList("", user_id, project_id, sort, order);
+        model.addAttribute("mini_projects", mini_projects);
+    }
+
+    public void setSearchedMiniProjectList(Model model,String keyword, int user_id, int project_id, String sort, String order) {
         project_id = 1;
-        LinkedList<MiniProject> mini_projects =  miniProjectRepository.getMiniProjectList(project_id);
+        LinkedList<MiniProject> mini_projects =  miniProjectRepository.getMiniProjectList(keyword, user_id, project_id, sort, order);
         model.addAttribute("mini_projects", mini_projects);
     }
 }
