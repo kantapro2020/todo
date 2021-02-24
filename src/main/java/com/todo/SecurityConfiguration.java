@@ -35,14 +35,18 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/css/**").permitAll()
+                .antMatchers("/js/**").permitAll()
+                .antMatchers("/images/**").permitAll()
+                .antMatchers("/").permitAll()
                 .antMatchers("/userRegistration").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login").usernameParameter("username").passwordParameter("password").permitAll()
                 .failureHandler(new ForwardAuthenticationFailureHandler("/login-error"))
+                .defaultSuccessUrl("/")
                 .and()
-                .logout().logoutUrl("/logout").invalidateHttpSession(true).deleteCookies("JSESSIONID");
+                .logout().logoutUrl("/logout").invalidateHttpSession(true).deleteCookies("JSESSIONID").logoutSuccessUrl("/login").permitAll();
     }
 
 }

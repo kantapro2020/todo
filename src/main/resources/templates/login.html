@@ -3,19 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" th:href="@{/css/reset.css}">
+<link rel="stylesheet" th:href="@{/css/header.css}">
+<link rel="stylesheet" th:href="@{/css/main-left.css}">
+<link rel="stylesheet" th:href="@{/css/task.css}">
+<script type="text/javascript" src="./js/script.js"></script>
 </head>
 <body>
-	<h1>ログイン</h1>
-		<form th:action="@{/login}" method="post">
+	<div th:include="header"></div>
+	<h1 class="page-title">ログイン</h1>
+		<form class="form" th:action="@{/login}" method="post">
 			<div th:if="${authenticationException}">
 				<span th:text="${authenticationException.message}"></span>
 			</div>
-			<label for="username">username</label>
-			<input type="text" name="username"><br/>
-			<label for="password">Password</label>
-			<input type="password" name="password"><br/>
-			<input type="submit" value="Login">
+			<label class="form-title" for="username">ユーザー名</label>
+			<input class="form-input" type="text" name="username"><br/>
+			<label class="form-title" for="password">パスワード</label>
+			<input class="form-input" type="password" name="password"><br/>
+			<input class="form-input submit-button" type="submit" value="ログイン">
 		</form>
-		<a th:href="@{/userRegistration}"> 従業員登録</a>
+		<a class="link" th:href="@{/userRegistration}"> 従業員登録</a>
 </body>
 </html>

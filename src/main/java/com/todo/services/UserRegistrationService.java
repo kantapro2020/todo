@@ -14,14 +14,15 @@ public class UserRegistrationService {
 
     @Transactional
     public void registerUser(User user) {
-        int result = 0;
-        result += userRepository.registerUser(user);
-        result += userRepository.registerUserRole(user);
-        
+//        int result = 0;
+        userRepository.registerUser(user);
+        userRepository.registerUserRole(user);
+        System.out.println(user.getCompany_id());
+
         //result = userRepository.registerUser() == userRepository.registerUserRole()
-        if (result != 2) {
-            throw new RuntimeException();
-        }
+//        if (result != 2) {
+//            throw new RuntimeException();
+//        }
     }
 
     public boolean isDuplicateUser(String email) {

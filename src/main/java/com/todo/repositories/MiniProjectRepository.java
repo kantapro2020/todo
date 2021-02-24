@@ -8,6 +8,9 @@ import com.todo.beans.MiniProject;
 
 @Mapper
 public interface MiniProjectRepository {
-    public  LinkedList<MiniProject> getMiniProjectList(int project_id);
+    public  LinkedList<MiniProject> getMiniProjectList(String keyword, int user_id, int project_id,String sort, String order);
     public  MiniProject getMiniProject(int mini_project_id);
+    public void registerMiniProject(MiniProject miniProject);
+    public  void updateMiniProject(MiniProject miniProject);
+    public void deleteMiniProject(int mini_project_id);
 }

@@ -1,7 +1,7 @@
 @charset "UTF-8";
 .main-right{
-	width:80%;
-	min-height:93vh;
+	width:100%;
+	min-height:150vh;
 }
 
 .mini-projects{
@@ -15,6 +15,18 @@
 	padding:20px 30px;
 }
 
+.add-miniProject{
+	position:fixed;
+	right:50px;
+	bottom:50px;
+	font-size:30px;
+	background-color:gray;
+	padding:50px;
+	color:white;
+	border-radius:50%;
+	font-weight:bold;
+}
+
 .search-form{
 	background-color:yellow;
 	padding:20px 0;
@@ -22,14 +34,14 @@
 }
 
 .mini-project-list-title{
-	text-align:left;
+	text-align:center;
 	font-size:20px;
 	line-height:30px;
 	border-bottom:1px solid black;
 }
 
 .mini-project-list-name{
-	text-align:left;
+	text-align:center;
 	font-size:18px;
 	line-height:30px;
 	white-space: nowrap;

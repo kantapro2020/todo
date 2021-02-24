@@ -1,5 +1,25 @@
 <!DOCTYPE html>
-<html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" th:href="@{/css/main-left.css}">
+<script type="text/javascript" th:inline="javascript" th:src="@{/js/script.js}"> </script>
+</head>
+<body>
+	<div id="main-left" class="main-left">
+	    <div class="userdatas">
+			<h1 class="userdata">Y&I Group</h1>
+			<h1 class="userdata" th:object="${user}" th:text="${user.username}">蛭間寛太</h1>
+	    </div>
+		<div class="list"  th:object="${mini_projects}">
+			<h1 class="list-title">プロジェクトA</h1>
+			<p  th:each="mini_project:${mini_projects}"><a th:text="${mini_project.mini_project_title}" class="list-name"  th:href="@{/{project_id}/project_detail/{mini_project_id} (project_id=1,mini_project_id=${mini_project.id})}"></a></p>
+		</div>
+    </div>
+
+<!-- <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -14,6 +34,7 @@
 				<h1 class="list-title">プロジェクトA</h1>
 				<p  th:each="mini_project:${mini_projects}"><a th:text="${mini_project.mini_project_title}" class="list-name"  th:href="@{/{project_id}/project_detail/{mini_project_id} (project_id=1,mini_project_id=${mini_project.id})}"></a></p>
 			</div>
-	    </div>
+	    </div> -->
+
 </body>
 </html>

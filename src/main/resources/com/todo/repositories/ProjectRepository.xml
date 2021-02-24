@@ -28,6 +28,19 @@
 	]]>
 	</select>
 
+	<select id="getProject" parameterType="java.lang.Integer" resultMap="getProjectList">
+		<![CDATA[
+		select
+			id,
+			project_name,
+			manager_id,
+			company_id,
+			created_at
+		from projects
+		where company_id = #{company_id};
+	]]>
+	</select>
+
 	<resultMap type="com.todo.beans.Project" id="getProjectList">
 		<result property="id" column="id"></result>
 		<result property="project_name" column="project_name"></result>
@@ -63,5 +76,17 @@
 		<result property="user_name" column="user_name"></result>
 	</resultMap>
 
+
+	<select id="getProjectUsersId" parameterType="java.lang.Integer" resultMap="getProjectUsersId">
+		<![CDATA[
+		select
+			user_id
+		from user_project
+		where project_id = #{project_id};
+		]]>
+	</select>
+	<resultMap type="java.lang.Integer" id="getProjectUsersId">
+		<result column="user_id"></result>
+	</resultMap>
 
 </mapper>

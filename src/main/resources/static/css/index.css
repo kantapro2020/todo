@@ -1,0 +1,42 @@
+@charset "UTF-8";
+.before-login{
+	height:100vh;
+	background-image:url("../images/IMG_1522.jpg");
+	background-size:cover;
+	background-color:black;
+}
+
+.top-items{
+	padding:150px 0;
+}
+
+.top-title{
+	color:white;
+	font-weight:bold;
+	font-size:70px;
+}
+
+.top-msg{
+	color:white;
+	font-size:40px;
+	margin-top:20px;
+}
+
+.links{
+	display:flex;
+	justify-content:space-around;
+}
+.top-link{
+	color:black;
+	font-weight:bold;
+	display:block;
+	padding:20px 50px;
+	background-color:gray;
+	border-radius:10px;
+	height:70px;
+	width:20%;
+	text-align:center;
+	line-height:70px;
+	font-size:30px;
+}
+
