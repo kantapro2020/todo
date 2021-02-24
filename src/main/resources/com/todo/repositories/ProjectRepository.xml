@@ -19,15 +19,7 @@
 			(#{user_id}, #{project_id})
 		]]>
 	</insert>
-	<select id ="getProject" parameterType="java.lang.Integer" resultMap="getProject">
-	<![CDATA[
-		SELECT
-			id,
-			project_name
-		FROM projects
-		WHERE id = #{project_id}
-	]]>
-	</select>
+
 	<resultMap type="com.todo.beans.Project" id="getProject">
 		<result property="id" column="id"></result>
 		<result property="project_name" column="project_name"></result>
