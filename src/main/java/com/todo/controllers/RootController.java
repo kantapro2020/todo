@@ -27,14 +27,10 @@ import com.todo.beans.MiniProject;
 import com.todo.beans.Project;
 import com.todo.beans.Task;
 import com.todo.beans.User;
-
-import com.todo.beans.UserProject;
-
 import com.todo.beans.UserRegistrationBean;
 import com.todo.repositories.MiniProjectRepository;
 import com.todo.repositories.ProjectRepository;
 import com.todo.repositories.TaskRepository;
-import com.todo.repositories.UserProjectRepository;
 import com.todo.repositories.UserRepository;
 import com.todo.services.GetUserDataService;
 import com.todo.services.MiniProjectService;
@@ -224,7 +220,6 @@ public class RootController {
     public String registerTask(@AuthenticationPrincipal User user,@Validated Task task, BindingResult bindingResult ,Model model,@PathVariable("project_id")  int project_id,@PathVariable("mini_project_id")  int mimi_project_id) {
         model.addAttribute("user", user);
         taskRepository.registerTask(task);
-//        taskService.setTaskList(model, mimi_project_id);
         return "redirect:/{project_id}/project_detail/{mini_project_id}";
     }
 
@@ -270,18 +265,6 @@ public class RootController {
         return "project_detail";
     }
 
-    @GetMapping("/miniProjectList/{project_id}")
-    public String miniProjectList(Model model) {
-        miniProjectService.setMiniProjectList(model, 1);
-        return "miniProjectList";
-    }
-
-    @PostMapping("{project_id}/deleteMiniProject/{mini_project_id}")
-    public String deleteMiniProject(Model model, @PathVariable("project_id") int project_id, @PathVariable("mini_project_id") int mini_project_id) {
-        return "redirect:/miniProjectList/{project_id}";
-    }
-
-
 //    蛭間記載
 //    プロジェクト一覧
     @GetMapping("/projectList")
@@ -308,7 +291,7 @@ public class RootController {
 
       LinkedList<Integer> users = project.getUserList();
        for(int user: users) {
-    	  projectRepository.registerUserProject(user, project.getId());
+//    	  projectRepository.registerUserProject(user, project.getId());
        }
        return "project_list";
    }
