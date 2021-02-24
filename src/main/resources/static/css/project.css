@@ -1,0 +1,38 @@
+@charset "UTF-8";
+.main-right{
+	width:80%;
+	min-height:93vh;
+}
+
+.page-title{
+	padding:20px 0;
+	border-bottom:1px solid black;
+	font-size:30px;
+	text-align:center;
+}
+
+
+.form{
+	margin:0 auto;
+	width:600px;
+
+
+}
+.form-title{
+	font-size:15px;
+	line-height:25px;
+	display:block;
+}
+
+.form-input{
+	width:600px;
+	font-size:12px;
+	box-sizing:border-box;
+}
+
+.submit-button{
+	margin-top:20px;
+}
+ul{
+	list-style: none;
+}

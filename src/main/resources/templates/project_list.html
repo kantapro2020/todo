@@ -7,34 +7,52 @@
 	content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 <title>プロジェクト一覧</title>
 <link rel="stylesheet" th:href="@{/css/reset.css}">
-<link rel="stylesheet" th:href="@{/css/stylesheet.css}">
+<link rel="stylesheet" th:href="@{/css/header.css}">
+<link rel="stylesheet" th:href="@{/css/main-left.css}">
+<link rel="stylesheet" th:href="@{/css/projectList.css}">
 </head>
 <body>
-	<div class="wrapper">
+	<header>
+    	<div th:replace="header"></div>
+    </header>
 		<div class="main">
-			<div class="title">
-				<h1>プロジェクトリスト</h1>
-			</div>
+			<div class="main-left">
+			    <div class="userdatas">
+					<h1 class="userdata">Y&I Group</h1>
+					<h1 class="userdata">蛭間寛太</h1>
+			    </div>
+				<div class="list">
+					<h1 class="list-title">プロジェクト一覧</h1>
+					<p><a class="list-name" href="#">プロジェクト名</a></p>
+					<p><a class="list-name" href="#">プロジェクト名</a></p>
+					<p><a class="list-name" href="#">プロジェクト名</a></p>
+					<p><a class="list-name" href="#">プロジェクト名</a></p>
+					<p><a class="list-name" href="#">プロジェクト名</a></p>
+				</div>
+		    </div>
+		    <div class="main-right">
+		    	<div class="project-title">
+					<h1>プロジェクトリスト</h1>
+				</div>
 			<!-- プロジェクト一覧 -->
-			<div th:object="${projects}" th:if="${projects}">
-				<table border="1">
-					<tr>
-						<th>No.</th>
-						<th>プロジェクトのタイトル</th>
-						<th>プロジェクトマネージャー</th>
-						<th>会社名</th>
-						<th>日付</th>
-					</tr>
-					<tr th:each="project : ${projects}">
-						<td th:text="${project.id}"></td>
-						<td th:text="${project.project_name}"></td>
-						<td th:text="${project.user_name}"></td>
-						<td th:text="${project.company_name}"></td>
-						<td th:text="${project.created_at}"></td>
-					</tr>
-				</table>
-			</div>
+					<table border="1" class="projects" th:object="${projects}" th:if="${projects}">
+						<tr>
+							<th class="project-list-title">No.</th>
+							<th class="project-list-title">プロジェクトのタイトル</th>
+							<th class="project-list-title">プロジェクトマネージャー</th>
+							<th class="project-list-title">会社名</th>
+							<th class="project-list-title">日付</th>
+						</tr>
+						<tr th:each="project : ${projects}">
+							<td class="project-list-name" th:text="${project.id}"></td>
+							<td class="project-list-name" th:text="${project.project_name}"></td>
+							<td class="project-list-name" th:text="${project.user_name}"></td>
+							<td class="project-list-name" th:text="${project.company_name}"></td>
+							<td class="project-list-name" th:text="${project.created_at}"></td>
+						</tr>
+					</table>
+		    </div>
+			
 		</div>
-	</div>
 </body>
 </html>

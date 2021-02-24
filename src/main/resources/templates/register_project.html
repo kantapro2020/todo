@@ -7,47 +7,57 @@
 	content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 <title>プロジェクト登録</title>
 <link rel="stylesheet" th:href="@{/css/reset.css}">
-<link rel="stylesheet" th:href="@{/css/stylesheet.css}">
+<link rel="stylesheet" th:href="@{/css/project.css}">
+<link rel="stylesheet" th:href="@{/css/reset.css}">
+<link rel="stylesheet" th:href="@{/css/header.css}">
+<link rel="stylesheet" th:href="@{/css/main-left.css}">
 </head>
 <body>
-	<div class="wrapper">
-		 <div class="top">
-
-			プロジェクトの追加
-			<form th:action="@{/registerProject}" method ="post" class="new" th:object="${projectBean}">
-				<h1>プロジェクト追加</h1>
-				<span class="input-title">プロジェクト名</span>
-				<input class="input" type="text" th:field="*{project_name}">
-				<br>
-				<!-- ラジオボタン -->
-				<div class="manager" th:object="${users}">
-					<label class="manager-label"><abbr title="required"></abbr>プロジェクトマネージャー</label>
-					<ul>
-					    <li th:each="user : ${users}">
-					      <!-- <input type="radio" th:field="${user.user_name}" />
-					      <label th:text="${user.id}">マネージャー</label> -->
-					      <input type="text" th:field="${user.user_name}">
-					 	</li>
-					  </ul>
+	<header>
+    	<div th:replace="header"></div>
+    </header>
+    <div class="main">
+	    <div class="main-left">
+			    <div class="userdatas">
+					<h1 class="userdata">Y&I Group</h1>
+					<h1 class="userdata">蛭間寛太</h1>
+			    </div>
+				<div class="list">
+					<h1 class="list-title">プロジェクト一覧</h1>
+					<p><a class="list-name" href="#">プロジェクト名</a></p>
+					<p><a class="list-name" href="#">プロジェクト名</a></p>
+					<p><a class="list-name" href="#">プロジェクト名</a></p>
+					<p><a class="list-name" href="#">プロジェクト名</a></p>
+					<p><a class="list-name" href="#">プロジェクト名</a></p>
 				</div>
-
-
-				<!-- チェックボタン -->
-				<div class="participant">
-					<label class="participant-label">参加者</label>
-					<ul>
-						<li th:each="user:${users}">
-					<!-- 		<input type="checkbox" th:value="${user.user_name}" th:field="*{user.user_name}"/>
-							<label th:text="${user.id}">ユーザー名</label> -->
-							<input type="text" th:field="${user.user_name}">
-					</ul>
-				</div>
-
-
-				<br>
-				<div class="btn"><input th:object="${now}" class="input button" type="submit" value="登録"></div>
-			</form>
-
+		    </div>
+			 <div class="main-right" th:object="${projectBean}">
+				<h1 class="page-title">プロジェクト追加</h1>
+				<form th:action="@{/registerProject}" method ="post" class="form">
+					<span class="form-title">プロジェクト名</span>
+					<input class="form-input" type="text" th:field="*{project_name}">
+					<br>
+					<!-- ラジオボタン -->
+					<div class="manager">
+						<span class="form-input" th:object="${users}">プロジェクトマネージャー</span>
+						<ul>
+						    <li th:each="user:${users}">
+						      <input type="radio" th:text="${user.username}">
+						 	</li>
+						  </ul>
+					</div>
+					<!-- チェックボタン -->
+					<div class="participant">
+						<span class="form-input" th:object="${users}">参加者</span>
+						<ul>
+							<li th:each="user:${users}">
+								<input type="checkbox" th:text="${user.username}">
+							</li>
+						</ul>
+					</div>
+					<br>
+					<input th:object="${now}" class="form-input submit-button" type="submit" value="登録">
+				</form>
 		</div>
 	</div>
 </body>

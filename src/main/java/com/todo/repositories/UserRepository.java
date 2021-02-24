@@ -1,6 +1,6 @@
 package com.todo.repositories;
 
-import java.util.List;
+import java.util.LinkedList;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -16,8 +16,10 @@ public interface UserRepository {
 
     public int registerUserRole(User user);
 
-    public List<User> getAllUser();
+    public LinkedList<User> getAllUser();
 
     public User getUser(int id);
+    
+    public LinkedList<User> getUsers();
 
 }
