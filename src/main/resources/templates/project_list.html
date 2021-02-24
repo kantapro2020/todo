@@ -45,14 +45,14 @@
 						</tr>
 						<tr th:each="project : ${projects}">
 							<td class="project-list-name" th:text="${project.id}"></td>
-							<td class="project-list-name" th:text="${project.project_name}"></td>
+							<td class="project-list-name"><a th:text="${project.project_name}" th:href="@{/miniProjectList/${project.id}}"></a></td>
 							<td class="project-list-name" th:text="${project.user_name}"></td>
 							<td class="project-list-name" th:text="${project.company_name}"></td>
 							<td class="project-list-name" th:text="${project.created_at}"></td>
 						</tr>
 					</table>
 		    </div>
-			
+
 		</div>
 </body>
 </html>

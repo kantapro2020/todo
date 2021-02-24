@@ -210,18 +210,13 @@ public class RootController {
     }
 
   @PostMapping("/registerProject")
+  public String registerProject(@ModelAttribute Project project, Model model) {
+	  projectRepository.registerProject(project);
 
-  public String registerProject(@ModelAttribute Project project,@Param("user_id")int user_id, @Param("project_id")int project_id, Model model) {
-
-      projectRepository.registerProject(project);
-       LinkedList<Project> projects = projectRepository.getProjectList(1);
-//       LinkedList<User> users = userRepository.getAllUser();
-//       for(User user: users) {
-//    	  projectRepository.registerUserProject(user_id, project_id);
-//    	  model.addAttribute("user", user);
-//       }
-       model.addAttribute("project", projects);
-
-       return "register_project";
+      LinkedList<Integer> users = project.getUserList();
+       for(int user: users) {
+    	  projectRepository.registerUserProject(user, project.getId());
+       }
+       return "project_list";
    }
 }

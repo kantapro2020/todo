@@ -19,7 +19,9 @@ public interface UserRepository {
     public LinkedList<User> getAllUser();
 
     public User getUser(int id);
-    
+
     public LinkedList<User> getUsers();
+
+    public LinkedList<User> getUserListByCompanyId(int company_id);
 
 }

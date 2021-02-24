@@ -42,7 +42,7 @@
 						<span class="form-input" th:object="${users}">プロジェクトマネージャー</span>
 						<ul>
 						    <li th:each="user:${users}">
-						      <input type="radio" th:text="${user.username}">
+						      <input type="radio" th:text="${user.username}" th:field="${projectBean.manager_id}" th:value=1>
 						 	</li>
 						  </ul>
 					</div>
@@ -51,7 +51,7 @@
 						<span class="form-input" th:object="${users}">参加者</span>
 						<ul>
 							<li th:each="user:${users}">
-								<input type="checkbox" th:text="${user.username}">
+								<input type="checkbox" th:text="${user.username}" th:field="${projectBean.userList}" th:value=${user.id}>
 							</li>
 						</ul>
 					</div>

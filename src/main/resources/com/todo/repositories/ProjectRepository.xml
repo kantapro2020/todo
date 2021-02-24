@@ -8,7 +8,15 @@
 			insert into projects
 			(project_name, manager_id, company_id, created_at)
 			VALUES
-			(#{project_name}, #{manager_id}, #{company_id}, null);
+			(#{project_name}, #{user.id}, #{user.company_id}, null);
+		]]>
+	</insert>
+	<insert id="registerUserProject">
+		<![CDATA[
+			INSERT INTO userProject
+			(user_id, project_id)
+			VALUES
+			(#{user_id}, #{project_id})
 		]]>
 	</insert>
 	<select id ="getProject" parameterType="java.lang.Integer" resultMap="getProject">
@@ -51,7 +59,10 @@
 
 	<select id="getUserList" parameterType="map" resultMap="getUserList">
 	<![CDATA[
-		SELECT id,user_name FROM users;
+		SELECT
+			id,
+			user_name
+		FROM users;
 	]]>
 	</select>
 	<resultMap type="com.todo.beans.User" id="getUserList">

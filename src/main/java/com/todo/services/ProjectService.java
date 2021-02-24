@@ -29,7 +29,10 @@ public class ProjectService {
 	}
 
 	public void setUserList(Model model) {
-		LinkedList<User> users = userRepository.getUsers();
+		LinkedList<User> users = userRepository.getUserListByCompanyId(1);
+		for (User user :users) {
+			System.out.println(user.getId());
+		}
 		model.addAttribute("users", users);
 	}
 }
