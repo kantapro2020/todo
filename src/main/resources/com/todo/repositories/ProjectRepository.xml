@@ -11,17 +11,20 @@
 			(#{project_name}, #{manager_id}, #{company_id}, null);
 		]]>
 	</insert>
-
+<!--プロジェクトリスト表示 -->
 	<select id="getProjectList" parameterType="java.lang.Integer" resultMap="getProjectList">
 		<![CDATA[
-		select
-			id,
-			project_name,
-			manager_id,
-			company_id,
-			created_at
-		from projects
-		where company_id = #{company_id};
+		SELECT
+			P.id,
+			P.project_name,
+			P.created_at,
+			U.user_name,
+			C.company_name
+		FROM projects P
+		INNER JOIN users U ON
+			U.id = P.manager_id
+		INNER JOIN companies C ON
+			C.id = P.company_id
 	]]>
 	</select>
 
@@ -41,10 +44,38 @@
 	<resultMap type="com.todo.beans.Project" id="getProjectList">
 		<result property="id" column="id"></result>
 		<result property="project_name" column="project_name"></result>
-		<result property="manager_id" column="manager_id"></result>
-		<result property="company_id" column="company_id"></result>
+		<result property="user_name" column="user_name"></result>
+		<result property="company_name" column="company_name"></result>
 		<result property="created_at" column="created_at"></result>
 	</resultMap>
+	<!-- 中間テーブルにinsert -->
+	<!-- <insert id="regisuterProject" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
+		<![CDATA[
+			insert into user_project
+			(user_id, project_id)
+			VALUES
+			<foreach item="actItem" collection="linkedList" open="" separator="" close="" >
+				(
+					#{actItem.userId.jdbcType=INT},
+					#{actItem.projectId.jdbcType=INT}
+				)
+			</foreach>
+		]]>
+	</insert>
+	<resultMap type="com.todo.beans.User" id="getProjectList">
+		<result property="user_name" column="user_name"></result>
+	</resultMap> -->
+
+
+	<select id="getUserList" parameterType="map" resultMap="getUserList">
+	<![CDATA[
+		SELECT user_name FROM users;
+	]]>
+	</select>
+	<resultMap type="com.todo.beans.User" id="getUserList">
+		<result property="user_name" column="user_name"></result>
+	</resultMap>
+
 
 	<select id="getProjectUsersId" parameterType="java.lang.Integer" resultMap="getProjectUsersId">
 		<![CDATA[
