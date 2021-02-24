@@ -7,7 +7,6 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.todo.beans.Project;
 import com.todo.beans.User;
-import com.todo.beans.UserProject;
 
 
 @Mapper
@@ -18,6 +17,9 @@ public interface ProjectRepository {
 	public LinkedList<Project> getProjectList(int company_id);
 	public LinkedList<Integer> getProjectUsersId(int project_id);
 	public LinkedList<User> getUserList(int id);
+
+	public int registerUserProject(int user_id, int project_id);
+
 	public int insertUserProject(LinkedList<UserProject> recordList);
 
 }

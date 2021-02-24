@@ -8,9 +8,30 @@
 			insert into projects
 			(project_name, manager_id, company_id, created_at)
 			VALUES
-			(#{project_name}, #{manager_id}, #{company_id}, null);
+			(#{project_name}, #{user.id}, #{user.company_id}, null);
 		]]>
 	</insert>
+	<insert id="registerUserProject">
+		<![CDATA[
+			INSERT INTO userProject
+			(user_id, project_id)
+			VALUES
+			(#{user_id}, #{project_id})
+		]]>
+	</insert>
+	<select id ="getProject" parameterType="java.lang.Integer" resultMap="getProject">
+	<![CDATA[
+		SELECT
+			id,
+			project_name
+		FROM projects
+		WHERE id = #{project_id}
+	]]>
+	</select>
+	<resultMap type="com.todo.beans.Project" id="getProject">
+		<result property="id" column="id"></result>
+		<result property="project_name" column="project_name"></result>
+	</resultMap>
 <!--プロジェクトリスト表示 -->
 	<select id="getProjectList" parameterType="java.lang.Integer" resultMap="getProjectList">
 		<![CDATA[
@@ -48,31 +69,17 @@
 		<result property="company_name" column="company_name"></result>
 		<result property="created_at" column="created_at"></result>
 	</resultMap>
-	<!-- 中間テーブルにinsert -->
-	<!-- <insert id="regisuterProject" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
-		<![CDATA[
-			insert into user_project
-			(user_id, project_id)
-			VALUES
-			<foreach item="actItem" collection="linkedList" open="" separator="" close="" >
-				(
-					#{actItem.userId.jdbcType=INT},
-					#{actItem.projectId.jdbcType=INT}
-				)
-			</foreach>
-		]]>
-	</insert>
-	<resultMap type="com.todo.beans.User" id="getProjectList">
-		<result property="user_name" column="user_name"></result>
-	</resultMap> -->
-
 
 	<select id="getUserList" parameterType="map" resultMap="getUserList">
 	<![CDATA[
-		SELECT user_name FROM users;
+		SELECT
+			id,
+			user_name
+		FROM users;
 	]]>
 	</select>
 	<resultMap type="com.todo.beans.User" id="getUserList">
+		<result property="id" column="id"></result>
 		<result property="user_name" column="user_name"></result>
 	</resultMap>
 
