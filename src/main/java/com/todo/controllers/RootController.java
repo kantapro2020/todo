@@ -27,31 +27,21 @@ import com.todo.beans.MiniProject;
 import com.todo.beans.Project;
 import com.todo.beans.Task;
 import com.todo.beans.User;
-import com.todo.beans.UserProject;
 import com.todo.beans.UserRegistrationBean;
 import com.todo.repositories.MiniProjectRepository;
 import com.todo.repositories.ProjectRepository;
 import com.todo.repositories.TaskRepository;
-import com.todo.repositories.UserProjectRepository;
 import com.todo.repositories.UserRepository;
 import com.todo.services.GetUserDataService;
 import com.todo.services.MiniProjectService;
+import com.todo.services.ProjectService;
 import com.todo.services.TaskService;
 import com.todo.services.UserRegistrationService;
-
 
 @Controller
 public class RootController {
     @Autowired
     TaskRepository taskRepository;
-
-    @Autowired
-    ProjectRepository projectRepository;
-    @Autowired
-    UserProjectRepository userProjectRepository;
-    @Autowired
-    UserRepository userRepository;
-
     @Autowired
     MiniProjectRepository miniProjectRepository;
 //    蛭間記述
@@ -59,6 +49,8 @@ public class RootController {
     ProjectRepository projectRepository;
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    ProjectService projectService;
     @Autowired
     TaskService taskService;
     @Autowired
@@ -295,46 +287,25 @@ public class RootController {
     	return "project_list";
 
     }
-
-
-
 //    プロジェクト登録
-    @GetMapping("/registerProject")
-    public String project(Model model) {
-
-    	LinkedList <User> users = userRepository.getUserList(1);
-    	for (User user : users) {
-    		System.out.println(user.getUser_name());
-    	}
+   @GetMapping("/registerProject")
+   public String registerProjectPage(Model model) {
+	    projectService.setUserList(model);
+	    projectService.setProject(model, 1);
+	    projectService.setProjectList(model, 1);
     	model.addAttribute("projectBean", new Project());
-    	model.addAttribute("userProjectBean", new UserProject());
     	model.addAttribute("now", new Date());
-    	model.addAttribute("users", users);
-    	return "register_project";
+	   return"register_project";
     }
 
-//		POST
-    @PostMapping("/registerProject")
+  @PostMapping("/registerProject")
+  public String registerProject(@ModelAttribute Project project, Model model) {
+	  projectRepository.registerProject(project);
 
-    public String registerProject(@ModelAttribute Project project,@ModelAttribute LinkedList<UserProject> recordList, Model model) {
-
-        projectRepository.registerProject(project);
-        LinkedList<Project> projects = projectRepository.getProjectList(1);
-        model.addAttribute("project", projects);
-
-        userProjectRepository.insertUserProject(recordList);
-        LinkedList<UserProject> userProjects = new LinkedList<>();
-    	UserProject userProject =new UserProject();
-    	userProject.setProject_id(3);
-    	userProject.setUser_id(1);
-    	userProjects.add(userProject);
-    	userProject =new UserProject();
-    	userProject.setProject_id(3);
-    	userProject.setUser_id(2);
-    	userProjects.add(userProject);
-    	model.addAttribute("userProject", userProjects);
-        return "project_list";
-    }
+      LinkedList<Integer> users = project.getUserList();
+       for(int user: users) {
+    	  projectRepository.registerUserProject(user, project.getId());
+       }
+       return "project_list";
+   }
 }
-
-
