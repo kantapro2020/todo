@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<title>プロジェクト更新</title>
+<link rel="stylesheet" th:href="@{/css/reset.css}">
+<link rel="stylesheet" th:href="@{/css/reset.css}">
+<link rel="stylesheet" th:href="@{/css/header.css}">
+<link rel="stylesheet" th:href="@{/css/main-left.css}">
+<link rel="stylesheet" th:href="@{/css/task.css}">
+</head>
+<body>
+
+   	<div th:include="header"></div>
+    <div class="main">
+	    <div th:include="main-left"></div>
+			 <div class="main-right" th:object="${projec}">
+				<h1 class="page-title">プロジェクト更新</h1>
+				<form th:action="@{/{company_id}/updateProject(company_id=1)}" method ="post" class="form">
+					<span class="form-title">プロジェクト名</span>
+					<input class="form-input" type="text" th:field="${project.project_name}">
+					<br>
+					<!-- ラジオボタン -->
+					<div class="manager">
+						<span class="form-title"  th:object="${users}">プロジェクトマネージャー</span>
+						<ul class="form-list">
+						    <li th:each="user:${users}">
+						      <input type="radio" th:text="${user.username}" th:field="${project.manager_id}" th:value=${user.id}>
+						 	</li>
+						  </ul>
+					</div>
+					<!-- チェックボタン -->
+					<div class="participant">
+						<span class="form-title" th:object="${users}">参加者</span>
+						<ul  class="form-list">
+							<li th:object="${user_ids}" th:each="user:${users}">
+								<input type="checkbox" th:text="${user.username}" th:value=${user.id} th:field="${project.user_list}">
+							</li>
+						</ul>
+					</div>
+					<br>
+					<input class="form-input submit-button" type="submit" value="登録">
+				</form>
+		</div>
+	</div>
+</body>
+</html>

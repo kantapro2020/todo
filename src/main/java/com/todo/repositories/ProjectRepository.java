@@ -14,6 +14,8 @@ public interface ProjectRepository {
 
 	public int registerProject(Project project);
 	public void registerUserProject(int project_id,int user_id);
+	public int updateProject(Project project);
+	public void updateUserProject(int project_id, int user_id);
 	public void deleteProject(int project_id);
 	public void deleteUserProject(int project_id);
 	public Project getProject(int id);
