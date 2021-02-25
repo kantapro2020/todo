@@ -23,7 +23,7 @@
 					<a class="project-title" th:text="${project.project_name}" th:href="@{/miniProjectList/{project_id}(project_id=${project.id})}"></a>
 					<p class="project-manager"th:text="${project.user_name}"></p>
 					<div class="project-links">
-						<a class="project-link" th:href="@{/miniProjectList/{project_id}(project_id=${project.id})}">更新</a>
+						<a class="project-link" th:href="@{/{company_id}/updateProject/{project_id}(company_id=${project.company_id}, project_id=${project.id})}">編集</a>
 						<form  th:action="@{/{company_id}/deleteProject/{project_id}(company_id=${project.company_id}, project_id=${project.id})}" method="post">
 							<input type="submit" value="削除">
 						</form>
