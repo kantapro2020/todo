@@ -49,7 +49,7 @@
 					<th class="mini-project-list-title"></th>
 				</tr>
 				<tr th:if="${mini_projects}" th:each="mini_project:${mini_projects}">
-					<td class="mini-project-list-name"><a th:text="${mini_project.mini_project_title}" th:href="@{/{project_id}/project_detail/{mini_project_id}(project_id=1, mini_project_id=${mini_project.id})}"></a></td>
+					<td class="mini-project-list-name"><a th:text="${mini_project.mini_project_title}" th:href="@{/{project_id}/project_detail/{mini_project_id}(project_id=${mini_project.project_id}, mini_project_id=${mini_project.id})}"></a></td>
 					<td class="mini-project-list-name">85%</td>
 					<td class="mini-project-list-name" th:text="${mini_project.username}"></td>
 					<td class="mini-project-list-name"><a th:href="@{/{project_id}/updateMiniProject/{mini_project_id}(project_id=${mini_project.project_id}, mini_project_id=${mini_project.id})}">更新</a></td>

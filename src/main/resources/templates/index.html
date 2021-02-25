@@ -13,6 +13,8 @@
 	    	<div th:include="main-left"></div>
 	    	<div class="main-right"></div>
 	    </div>
+	    <a th:href="@{/{company_id}/projectList(company_id=${user.company_id})}">プロジェクト一覧</a>
+	    <a></a>
 	</div>
 
     <div th:unless="${user}" class ="before-login">

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+a<!DOCTYPE html>
 <html xmlns:th="www.thymeleaf.org">
 <head>
 <meta charset="utf-8">
@@ -9,7 +9,7 @@
 <link rel="stylesheet" th:href="@{/css/reset.css}">
 <link rel="stylesheet" th:href="@{/css/header.css}">
 <link rel="stylesheet" th:href="@{/css/main-left.css}">
-<link rel="stylesheet" th:href="@{/css/projectList.css}">
+<link rel="stylesheet" th:href="@{/css/project_list.css}">
 
 </head>
 <body>
@@ -23,9 +23,9 @@
 					<a class="project-title" th:text="${project.project_name}" th:href="@{/miniProjectList/{project_id}(project_id=${project.id})}"></a>
 					<p class="project-manager"th:text="${project.user_name}"></p>
 					<div class="project-links">
-						<a class="project-link" th:href="@{/{company_id}/updateProject/{project_id}(company_id=${project.company_id}, project_id=${project.id})}">編集</a>
-						<form  th:action="@{/{company_id}/deleteProject/{project_id}(company_id=${project.company_id}, project_id=${project.id})}" method="post">
-							<input type="submit" value="削除">
+						<a class="project-link" th:href="@{/{company_id}/updateProject/{project_id}(company_id=${1}, project_id=${project.id})}">編集</a>
+						<form  th:action="@{/{company_id}/deleteProject/{project_id}(company_id=${1}, project_id=${project.id})}" method="post">
+							<input class="project-link" type="submit" value="削除">
 						</form>
 					</div>
 				</div>

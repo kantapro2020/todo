@@ -65,6 +65,15 @@
 	justify-content:space-around;
 }
 
+.project-link{
+	background-color:orange;
+	color:blue;
+	font-weight:bold;
+	text-decoration:none;
+	font-size:15px;
+	border:none;
+}
+
 .font-black{
 	color:black;
 }

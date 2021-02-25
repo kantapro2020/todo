@@ -18,7 +18,7 @@ public interface ProjectRepository {
 	public void updateUserProject(int project_id, int user_id);
 	public void deleteProject(int project_id);
 	public void deleteUserProject(int project_id);
-	public Project getProject(int id);
+	public Project getProject(int project_id);
 	public LinkedList<Project> getProjectList(int company_id);
 	public LinkedList<Integer> getProjectUsersId(int project_id);
 	public LinkedList<User> getUserList(int id);
