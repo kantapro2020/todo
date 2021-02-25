@@ -3,6 +3,7 @@
 
 <mapper namespace="com.todo.repositories.ProjectRepository">
 
+<!-- プロジェクトテーブルにinsert -->
 	<insert id="registerProject" parameterType="com.todo.beans.Project" useGeneratedKeys="true" keyProperty="id">
 		<![CDATA[
 			insert into projects
@@ -11,6 +12,7 @@
 			(#{project_name}, #{manager_id}, #{company_id}, #{created_at});
 		]]>
 	</insert>
+<!-- ユーザープロジェクトテーブルにinsert -->
 	<insert id="registerUserProject" parameterType="map">
 		<![CDATA[
 			INSERT INTO user_project
@@ -19,7 +21,6 @@
 			(${param1}, ${param2})
 		]]>
 	</insert>
-
 	<resultMap type="com.todo.beans.Project" id="getProject">
 		<result property="id" column="id"></result>
 		<result property="project_name" column="project_name"></result>

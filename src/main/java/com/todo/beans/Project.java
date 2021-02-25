@@ -3,13 +3,20 @@ package com.todo.beans;
 import java.io.Serializable;
 import java.util.LinkedList;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 public class Project implements Serializable {
 
 
 	private static final long serialVersionUID = 42L;
 	private int id;
+	@NotEmpty
+	@Size(max = 20)
 	private String project_name;
+	@NotEmpty
 	private int manager_id;
+	@NotEmpty
 	private int company_id;
 	private String created_at;
 	private String user_name;
