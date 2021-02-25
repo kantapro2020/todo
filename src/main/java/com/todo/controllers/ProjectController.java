@@ -3,8 +3,6 @@ package com.todo.controllers;
 import java.util.Date;
 import java.util.LinkedList;
 
-import javax.websocket.server.PathParam;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -67,11 +65,37 @@ public String registerProject(@ModelAttribute Project project,
         }
              return "redirect:/{company_id}/projectList";
         }
+@GetMapping("/{company_id}/updateProject/{project_id}")
+public String updateProjectPage(@AuthenticationPrincipal User user,@ModelAttribute Project project,
+        @PathVariable("company_id")int company_id,
+        Model model) {
+	model.addAttribute("user", user);
+	projectService.setProject(project, company_id);
+    projectService.setUserList(model,company_id);
+    projectService.setProjectList(model, company_id);
+    return "update_project";
+}
+@PostMapping("/{company_id}/updateProject/{project_id}")
+public String updateProject(@AuthenticationPrincipal User user,@ModelAttribute Project project,
+        @PathVariable("company_id")int company_id,
+        Model model) {
+	projectRepository.updateProject(project);
+	Date now= new Date();
+	project.setUpdated_at(now);
+    project.setCompany_id(1);
+	for(int user_id: project.getUser_list()) {
+        projectRepository.updateUserProject(project.getId(), user_id);
+        System.out.print(project.getId());
+        System.out.print(user_id);
+    }
+	return "redirect:/{company_id}/projectList";
+}
 
 @PostMapping("/{company_id}/deleteProject/{project_id}")
-public String deleteProject(@PathParam("company_id")int company_id, @PathParam("project_id")int project_id) {
-    projectRepository.deleteProject(project_id);
-    projectRepository.deleteUserProject(project_id);
+public String deleteProject(@PathVariable("company_id")int company_id, @PathVariable("project_id")int project_id) {
+	projectRepository.deleteUserProject(project_id);
+	projectRepository.deleteProject(project_id);
+
     return "redirect:/{company_id}/projectList";
 }
 
