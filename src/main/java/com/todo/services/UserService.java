@@ -47,6 +47,7 @@ public class UserService {
     }
 
     public void setLoginUser(Model model, User user) {
+        System.out.println(user.getCompany_id());
         model.addAttribute("user",user);
     }
 

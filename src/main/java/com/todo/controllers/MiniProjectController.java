@@ -47,7 +47,7 @@ public class MiniProjectController {
         companyService.setCompany(model, 1);
         projectService.setProject(model, project_id);
         miniProjectService.setMiniProjectList(model, project_id);
-        return "miniProjectList";
+        return "mini_project_list";
     }
 
     @GetMapping("{project_id}/registerMiniProject")
@@ -108,6 +108,6 @@ public class MiniProjectController {
         companyService.setCompany(model, 1);
         projectService.setProject(model, project_id);
         miniProjectService.setSearchedMiniProjectList(model, keyword, user_id, project_id,sort, order);
-        return "miniProjectList";
+        return "mini_project_list";
     }
 }

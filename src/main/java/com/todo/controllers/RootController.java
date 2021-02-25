@@ -46,7 +46,7 @@ public class RootController {
 
     @PostMapping("/login")
     public String loginUser( ) {
-        return "redirect:/miniProjectList/1";
+        return "/";
     }
 
     @PostMapping("/login-error")
@@ -59,7 +59,7 @@ public class RootController {
     @GetMapping("/userRegistration")
     public String userRegistration(Model model) {
         model.addAttribute("userRegistrationBean", new UserRegistrationBean());
-        return "userRegistration";
+        return "user_registration";
     }
 
     @PostMapping("/userRegistration")
@@ -67,15 +67,14 @@ public class RootController {
             BindingResult bindingResult,
             Model model) {
         if (bindingResult.hasErrors()) {
-            return "userRegistration";
+            return "user_registration";
          }
 
         if (userService.isDuplicateUser(userRegistrationBean.getUsername())) {
             model.addAttribute("duplicateError", "すでに使われているユーザー名です");
-            return "userRegistration";
+            return "user_registration";
         }
         userService.registerUser(userRegistrationBean);
-
         return "login";
     }
 }

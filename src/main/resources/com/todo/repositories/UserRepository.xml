@@ -8,7 +8,7 @@
 		insert into users
 		(user_name, password, delete_flg, created_at, company_id)
 		values
-		(#{username} , #{password}, #{delete_flg}, #{created_at},1);
+		(#{username} , #{password}, #{delete_flg}, #{created_at},#{company_id});
 	]]>
 	</insert>
 
@@ -44,7 +44,7 @@
 		<result property="delete_flg" column="delete_flg"></result>
 		<result property="created_at" column="created_at"></result>
 		<result property="updated_at" column="updated_at"></result>
-		<result property="company_id" column="company_at"></result>
+		<result property="company_id" column="company_id"></result>
 		<collection property="roles" ofType="java.lang.String">
 			<result column="ROLE_NAME"></result>
 		</collection>
@@ -124,5 +124,5 @@
 		<result property="id" column="ID"></result>
 		<result property="username" column="USER_NAME"></result>
 	</resultMap>
-	
+
 </mapper>
