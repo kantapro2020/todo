@@ -1,10 +1,10 @@
 @charset "UTF-8";
 .main-right{
-	width:80%;
-	min-height:93vh;
+	width:100%;
+	min-height:150vh;
 }
 
-.projects{
+/* .projects{
 	width:100%;
 	border-bottom:1px solid black;
 }
@@ -27,9 +27,56 @@
 	font-size:18px;
 	line-height:30px;
 	white-space: nowrap;
+} */
+.projects{
+	display:flex;
+	/* justify-content:space-; */
+	flex-wrap:wrap;
+	margin:0 auto;
+
 }
 
+.project-block{
+	width:48%;
+	background-color:orange;
+	border-radius:25px;
+	padding:20px 30px;
+	text-align:center;
+	margin:20px 1% 0 1% ;
+	box-sizing:border-box;
+}
+
+.project-title{
+	display:block;
+	font-size:40px;
+	text-decoration:none;
+	color:black;
+	font-weight:bold;
+
+}
+
+.project-manager{
+	font-size:30px;
+	line-height:50px;
+}
+
+.project-links{
+	display:flex;
+	justify-content:space-around;
+}
 
 .font-black{
 	color:black;
+}
+
+.add-task{
+	position:fixed;
+	right:50px;
+	bottom:50px;
+	font-size:30px;
+	background-color:gray;
+	padding:50px;
+	color:white;
+	border-radius:50%;
+	font-weight:bold;
 }

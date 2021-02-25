@@ -3,15 +3,19 @@ package com.todo.controllers;
 import java.util.Date;
 import java.util.LinkedList;
 
-import org.apache.ibatis.annotations.Param;
+import javax.websocket.server.PathParam;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.todo.beans.Project;
+import com.todo.beans.User;
 import com.todo.repositories.ProjectRepository;
 import com.todo.services.ProjectService;
 
@@ -25,40 +29,50 @@ public class ProjectController {
 
 //  蛭間記載
 //  プロジェクト一覧
-  @GetMapping("/projectList")
-  public String getProjectList(Model model) {
-      LinkedList<Project> projects = projectRepository.getProjectList(3);
+  @GetMapping("/{company_id}/projectList")
+  public String getProjectList(@AuthenticationPrincipal User user,Model model, @PathVariable("company_id") int company_id) {
+      model.addAttribute("user", user);
+      LinkedList<Project> projects = projectRepository.getProjectList(company_id);
       model.addAttribute("projects",projects);
       return "project_list";
 
   }
 //  プロジェクト登録
- @GetMapping("/registerProject")
- public String registerProjectPage(Model model) {
-      projectService.setUserList(model,1);
-      projectService.setProjectList(model, 1);
-      LinkedList<Integer> user_ids = new LinkedList<Integer>();
+ @GetMapping("/{company_id}/registerProject")
+ public String registerProjectPage(@AuthenticationPrincipal User user,Model model,
+                                                         @PathVariable("company_id")int company_id) {
+     model.addAttribute("user", user);
+      projectService.setUserList(model,company_id);
+      projectService.setProjectList(model, company_id);
       model.addAttribute("projectBean", new Project());
-      model.addAttribute("user_ids", user_ids);
      return"register_project";
   }
 
-@PostMapping("/registerProject")
-public String registerProject(@ModelAttribute Project project,@Param("user_list") int[] user_list,Model model) {
-//    if(project==null) {
-//        return "redirect:/registerProject";
-//    }
-    Date now= new Date();
-    project.setCreated_at(now);
-    project.setCompany_id(1);
-    projectRepository.registerProject(project);
+@PostMapping("/{company_id}/registerProject")
+public String registerProject(@ModelAttribute Project project,
+        @PathVariable("company_id")int company_id,
+        Model model) {
+        if(project==null) {
+            return "redirect:/{company_id}/registerProject";
+        }
+        Date now= new Date();
+        project.setCreated_at(now);
+        project.setCompany_id(1);
+        projectRepository.registerProject(project);
 
-    for(int user_id:user_list) {
-        projectRepository.registerUserProject(project.getId(), user_id);
-        System.out.print(project.getId());
-        System.out.print(user_id);
-    }
+        for(int user_id: project.getUser_list()) {
+            projectRepository.registerUserProject(project.getId(), user_id);
+            System.out.print(project.getId());
+            System.out.print(user_id);
+        }
+             return "redirect:/{company_id}/projectList";
+        }
 
-     return "project_list";
- }
+@PostMapping("/{company_id}/deleteProject/{project_id}")
+public String deleteProject(@PathParam("company_id")int company_id, @PathParam("project_id")int project_id) {
+    projectRepository.deleteProject(project_id);
+    projectRepository.deleteUserProject(project_id);
+    return "redirect:/{company_id}/projectList";
+}
+
 }

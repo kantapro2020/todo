@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.todo.beans.MiniProject;
-import com.todo.beans.Project;
 import com.todo.beans.User;
 import com.todo.repositories.MiniProjectRepository;
 import com.todo.repositories.ProjectRepository;
@@ -37,8 +36,7 @@ public class MiniProjectController {
     @GetMapping("/miniProjectList/{project_id}")
     public String miniProjectList(@AuthenticationPrincipal User user,Model model, @PathVariable("project_id") int project_id) {
         model.addAttribute("user", user);
-        Project project =projectRepository.getProject(project_id);
-        model.addAttribute(project);
+        projectService.setProject(model, project_id);
         miniProjectService.setMiniProjectList(model, project_id);
         return "miniProjectList";
     }
@@ -96,8 +94,7 @@ public class MiniProjectController {
                                                         @Param("sort")String sort,
                                                         @Param("order")String order) {
         model.addAttribute("user", user);
-        Project project =projectRepository.getProject(project_id);
-        model.addAttribute(project);
+        projectService.setProject(model, project_id);
         miniProjectService.setSearchedMiniProjectList(model, keyword, user_id, project_id,sort, order);
         return "miniProjectList";
     }

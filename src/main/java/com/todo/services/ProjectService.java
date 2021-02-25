@@ -18,8 +18,8 @@ public class ProjectService {
 	@Autowired
 	UserRepository userRepository;
 
-	public void setProject(Model model, int company_id) {
-		Project project =  projectRepository.getProject(company_id);
+	public void setProject(Model model, int id) {
+		Project project =  projectRepository.getProject(id);
 		model.addAttribute("project", project);
 	}
 

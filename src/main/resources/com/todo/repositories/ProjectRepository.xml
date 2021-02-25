@@ -11,6 +11,7 @@
 			(#{project_name}, #{manager_id}, #{company_id}, #{created_at});
 		]]>
 	</insert>
+
 	<insert id="registerUserProject" parameterType="map">
 		<![CDATA[
 			INSERT INTO user_project
@@ -20,12 +21,22 @@
 		]]>
 	</insert>
 
-	<resultMap type="com.todo.beans.Project" id="getProject">
-		<result property="id" column="id"></result>
-		<result property="project_name" column="project_name"></result>
-	</resultMap>
+	<delete id="deleteProject" parameterType="java.lang.Integer">
+		<![CDATA[
+			delete from projects
+			where id = "${project_id}"
+		]]>
+	</delete>
+
+	<delete id="deleteUserProject" parameterType="java.lang.Integer">
+		<![CDATA[
+			delete from user_project
+			where project_id = "${project_id}"
+		]]>
+	</delete>
+
 <!--プロジェクトリスト表示 -->
-	<select id="getProjectList" parameterType="java.lang.Integer" resultMap="getProjectList">
+	<select id="getProjectList" parameterType="java.lang.Integer" resultMap="getProject">
 		<![CDATA[
 		SELECT
 			P.id,
@@ -38,11 +49,12 @@
 			U.id = P.manager_id
 		INNER JOIN companies C ON
 			C.id = P.company_id
+		where P.company_id =#{company_id}
 	]]>
 	</select>
 
-	<select id="getProject" parameterType="java.lang.Integer" resultMap="getProjectList">
-		<![CDATA[
+	<select id="getProject" parameterType="java.lang.Integer" resultMap="getProject">
+	<![CDATA[
 		select
 			id,
 			project_name,
@@ -50,11 +62,11 @@
 			company_id,
 			created_at
 		from projects
-		where company_id = #{company_id};
+		where id = #{id};
 	]]>
 	</select>
 
-	<resultMap type="com.todo.beans.Project" id="getProjectList">
+	<resultMap type="com.todo.beans.Project" id="getProject">
 		<result property="id" column="id"></result>
 		<result property="project_name" column="project_name"></result>
 		<result property="user_name" column="user_name"></result>
@@ -70,6 +82,7 @@
 		FROM users;
 	]]>
 	</select>
+
 	<resultMap type="com.todo.beans.User" id="getUserList">
 		<result property="id" column="id"></result>
 		<result property="user_name" column="user_name"></result>
