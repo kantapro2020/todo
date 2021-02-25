@@ -20,7 +20,4 @@ public interface ProjectRepository {
 	public LinkedList<Project> getProjectList(int company_id);
 	public LinkedList<Integer> getProjectUsersId(int project_id);
 	public LinkedList<User> getUserList(int id);
-
-
-
 }

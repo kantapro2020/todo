@@ -19,7 +19,7 @@
 				<a class="add-miniProject" th:href="@{/{project_id}/registerMiniProject(project_id=${project.id})}">追加</a>
 			</div>
 
- 			<form class="search-form"  th:action="@{/searchMiniProject/{project_id}(project_id=${project_id})}" method="post" >
+ 			<form class="search-form"  th:action="@{/searchMiniProject/{project_id}(project_id=${project.id})}" method="post" >
 				<label>絞り込み</label>
 				<input type="text" name="keyword">
 				<select name="user_id" />
