@@ -9,7 +9,7 @@ a<!DOCTYPE html>
 <link rel="stylesheet" th:href="@{/css/reset.css}">
 <link rel="stylesheet" th:href="@{/css/header.css}">
 <link rel="stylesheet" th:href="@{/css/main-left.css}">
-<link rel="stylesheet" th:href="@{/css/projectList.css}">
+<link rel="stylesheet" th:href="@{/css/project_list.css}">
 
 </head>
 <body>
@@ -25,7 +25,7 @@ a<!DOCTYPE html>
 					<div class="project-links">
 						<a class="project-link" th:href="@{/{company_id}/updateProject/{project_id}(company_id=${1}, project_id=${project.id})}">編集</a>
 						<form  th:action="@{/{company_id}/deleteProject/{project_id}(company_id=${1}, project_id=${project.id})}" method="post">
-							<input type="submit" value="削除">
+							<input class="project-link" type="submit" value="削除">
 						</form>
 					</div>
 				</div>
