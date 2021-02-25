@@ -8,18 +8,18 @@
 <link rel="stylesheet" th:href="@{/css/task.css}">
 <title>Insert title here</title>
 </head>
-<body th:object="${project_id}">
+<body th:object="${project}">
 	<div th:include="header"></div>
 	<div class="main">
 		<div th:include="main-left"></div>
 		<h1 class="page-title">ミニプロジェクト追加</h1>
-		<form class="form" th:action="@{/{project_id}/registerMiniProject(project_id=${project_id})}" method="post" th:object="${mini_project}">
+		<form class="form" th:action="@{/{project_id}/registerMiniProject(project_id=${project.id})}" method="post" th:object="${mini_project}">
 			<span class="form-title">ミニプロジェクト名</span>
 			<input class="form-input" type="text" th:field="${mini_project.mini_project_title}"><br>
 			<span class="form-title">ユーザー</span>
 			<input type="radio" th:field="${mini_project.user_id}" th:value="1" th:text="user">
 			<input type="radio" th:field="${mini_project.user_id}" th:value="2" th:text="user1">
-		 	<input type="hidden" th:field="${mini_project.project_id}" th:value="${project_id}">
+		 	<input type="hidden" th:field="${mini_project.project_id}" th:value="${project.id}">
 			<input class="form-input submit-button"  type="submit" value="追加">
 		</form>
 	</div>

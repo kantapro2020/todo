@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.todo.repositories.CompanyRepository">
+
+	<select id ="getCompany" parameterType="java.lang.Integer" resultMap="getCompany">
+	<![CDATA[
+		select
+			id,
+			company_name
+		from companies
+		where id  = #{company_id};
+	]]>
+	</select>
+
+	<resultMap type="com.todo.beans.Company" id="getCompany">
+		<result property="id" column="id"></result>
+		<result property="company_name" column="company_name"></result>
+	</resultMap>
+</mapper>

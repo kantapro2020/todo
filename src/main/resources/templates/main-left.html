@@ -8,9 +8,9 @@
 <script type="text/javascript" th:inline="javascript" th:src="@{/js/script.js}"> </script>
 </head>
 <body>
-	<div id="main-left" class="main-left">
+	<div id="main-left" class="main-left" th:object="${company}">
 	    <div class="userdatas">
-			<h1 class="userdata">Y&I Group</h1>
+			<h1 class="userdata" th:text="${company.company_name}">Y&I Group</h1>
 			<h1 class="userdata" th:object="${user}" th:text="${user.username}">蛭間寛太</h1>
 	    </div>
 		<div class="list"  th:object="${mini_projects}">

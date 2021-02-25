@@ -1,8 +1,5 @@
 package com.todo.controllers;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,43 +16,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.todo.beans.User;
 import com.todo.beans.UserRegistrationBean;
-import com.todo.repositories.MiniProjectRepository;
-import com.todo.repositories.ProjectRepository;
-import com.todo.repositories.TaskRepository;
-import com.todo.repositories.UserRepository;
-import com.todo.services.GetUserDataService;
+import com.todo.services.CompanyService;
 import com.todo.services.MiniProjectService;
-import com.todo.services.ProjectService;
-import com.todo.services.TaskService;
-import com.todo.services.UserRegistrationService;
+import com.todo.services.UserService;
 
 @Controller
 public class RootController {
     @Autowired
-    TaskRepository taskRepository;
-    @Autowired
-    MiniProjectRepository miniProjectRepository;
-//    蛭間記述
-    @Autowired
-    ProjectRepository projectRepository;
-    @Autowired
-    UserRepository userRepository;
-    @Autowired
-    ProjectService projectService;
-    @Autowired
-    TaskService taskService;
+    CompanyService companyService;
     @Autowired
     MiniProjectService miniProjectService;
-    @Autowired
-    UserRegistrationService userRegistrationService;
-    @Autowired
-    GetUserDataService getUserDataService;
+   @Autowired
+    UserService userService;
     @Autowired
     PasswordEncoder passwordEncoder;
 
     @RequestMapping("/")
     public String root(@AuthenticationPrincipal User user,Model model) {
-        model.addAttribute("user", user);
+        userService.setLoginUser(model, user);
+        companyService.setCompany(model,1);
         miniProjectService.setMiniProjectList(model, 1);
         return "index";
     }
@@ -87,27 +66,15 @@ public class RootController {
     public String registrationUser(@Valid  UserRegistrationBean userRegistrationBean,
             BindingResult bindingResult,
             Model model) {
-
         if (bindingResult.hasErrors()) {
-
             return "userRegistration";
-        }
+         }
 
-        if (userRegistrationService.isDuplicateUser(userRegistrationBean.getUsername())) {
+        if (userService.isDuplicateUser(userRegistrationBean.getUsername())) {
             model.addAttribute("duplicateError", "すでに使われているユーザー名です");
             return "userRegistration";
         }
-
-        Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-        String created_at = sdf.format(calendar.getTime());
-
-        User user = new User();
-        user.setUsername(userRegistrationBean.getUsername());
-        user.setPassword(passwordEncoder.encode(userRegistrationBean.getPassword()));
-        user.setCompany_id(userRegistrationBean.getCompany_id());
-        user.setCreated_at(created_at);
-        userRegistrationService.registerUser(user);
+        userService.registerUser(userRegistrationBean);
 
         return "login";
     }
