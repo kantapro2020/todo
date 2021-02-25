@@ -1,25 +1,16 @@
 package com.todo.controllers;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-import javax.validation.Valid;
-import javax.websocket.server.PathParam;
-=======
+
 import java.util.Date;
-import java.util.LinkedList;
->>>>>>> 4fdb8340d8672c2d47a692320123758c963d3ec6
-=======
+
 import javax.validation.Valid;
-import javax.websocket.server.PathParam;
-import java.util.Date;
-import java.util.LinkedList;
->>>>>>> 2db810c6f3717f61f38be48f292fc74f81874acb
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -75,11 +66,12 @@ public String registerProject(@Valid Project project,
         return "redirect:/{company_id}/projectList";
         }
 @GetMapping("/{company_id}/updateProject/{project_id}")
-public String updateProjectPage(@AuthenticationPrincipal User user,@ModelAttribute Project project,
-        @PathVariable("company_id")int company_id,
-        Model model) {
+public String updateProjectPage(@AuthenticationPrincipal User user,
+                                                     @ModelAttribute Project project,
+                                                     @PathVariable("company_id")int company_id,
+                                                     Model model) {
 	model.addAttribute("user", user);
-	projectService.setProject(project, company_id);
+	projectService.setProject(model,project.getId());
     projectService.setUserList(model,company_id);
     projectService.setProjectList(model, company_id);
     return "update_project";

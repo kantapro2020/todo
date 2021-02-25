@@ -21,7 +21,6 @@ public class ProjectService {
 
 	public void setProject(Model model, int id) {
 		Project project =  projectRepository.getProject(id);
-		System.out.println(project.getId());
 		model.addAttribute("project", project);
 	}
 

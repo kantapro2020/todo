@@ -31,7 +31,6 @@ public class MiniProjectService {
     }
 
     public void setSearchedMiniProjectList(Model model,String keyword, int user_id, int project_id, String sort, String order) {
-        project_id = 1;
         LinkedList<MiniProject> mini_projects =  miniProjectRepository.getMiniProjectList(keyword, user_id, project_id, sort, order);
         model.addAttribute("mini_projects", mini_projects);
     }
