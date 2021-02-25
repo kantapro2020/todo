@@ -1,7 +1,7 @@
 @charset "UTF-8";
 .main-right{
-	width:80%;
-	min-height:93vh;
+	width:100%;
+	min-height:150vh;
 }
 
 .projects{
@@ -13,6 +13,18 @@
 	font-size:30px;
 	border-bottom:1px solid black;
 	padding:20px 30px;
+}
+
+.add-project{
+	position:fixed;
+	right:50px;
+	bottom:50px;
+	font-size:30px;
+	background-color:gray;
+	padding:50px;
+	color:white;
+	border-radius:50%;
+	font-weight:bold;
 }
 
 .project-list-title{

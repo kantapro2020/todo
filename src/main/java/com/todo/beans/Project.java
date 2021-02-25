@@ -1,7 +1,6 @@
 package com.todo.beans;
 
 import java.io.Serializable;
-import java.sql.Date;
 import java.util.LinkedList;
 
 public class Project implements Serializable {
@@ -12,10 +11,10 @@ public class Project implements Serializable {
 	private String project_name;
 	private int manager_id;
 	private int company_id;
-	private Date created_at;
+	private String created_at;
 	private String user_name;
 	private String company_name;
-	private LinkedList<Integer> userList;
+	private LinkedList<Integer> user_list;
 
 
 	public int getId() {
@@ -46,10 +45,10 @@ public class Project implements Serializable {
 		this.company_id = company_id;
 	}
 
-	public Date getCreated_at() {
+	public String getCreated_at() {
 		return created_at;
 	}
-	public void setCreated_at(Date created_at) {
+	public void setCreated_at(String created_at) {
 		this.created_at = created_at;
 	}
 
@@ -67,10 +66,10 @@ public class Project implements Serializable {
 		this.company_name = company_name;
 	}
 
-	public LinkedList<Integer> getUserList() {
-		return userList;
+	public LinkedList<Integer>  getUser_list() {
+		return user_list;
 	}
-	public void setUserList(LinkedList<Integer> userList) {
-		this.userList = userList;
+	public void setUser_list(LinkedList<Integer> user_list) {
+		this.user_list = user_list;
 	}
 }

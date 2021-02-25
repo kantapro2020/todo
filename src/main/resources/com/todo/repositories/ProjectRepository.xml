@@ -8,15 +8,15 @@
 			insert into projects
 			(project_name, manager_id, company_id, created_at)
 			VALUES
-			(#{project_name}, #{user.id}, #{user.company_id}, null);
+			(#{project_name}, #{manager_id}, #{company_id}, #{created_at});
 		]]>
 	</insert>
-	<insert id="registerUserProject">
+	<insert id="registerUserProject" parameterType="map">
 		<![CDATA[
-			INSERT INTO userProject
-			(user_id, project_id)
+			INSERT INTO user_project
+			(project_id, user_id)
 			VALUES
-			(#{user_id}, #{project_id})
+			(${param1}, ${param2})
 		]]>
 	</insert>
 

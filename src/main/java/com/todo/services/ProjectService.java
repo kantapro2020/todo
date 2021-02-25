@@ -18,8 +18,8 @@ public class ProjectService {
 	@Autowired
 	UserRepository userRepository;
 
-	public void setProject(Model model, int id) {
-		Project project =  projectRepository.getProject(1);
+	public void setProject(Model model, int company_id) {
+		Project project =  projectRepository.getProject(company_id);
 		model.addAttribute("project", project);
 	}
 
@@ -28,11 +28,8 @@ public class ProjectService {
 		model.addAttribute("projects", projects);
 	}
 
-	public void setUserList(Model model) {
-		LinkedList<User> users = userRepository.getUserListByCompanyId(1);
-		for (User user :users) {
-			System.out.println(user.getId());
-		}
+	public void setUserList(Model model, int conpany_id) {
+		LinkedList<User> users = userRepository.getUserListByCompanyId(conpany_id);
 		model.addAttribute("users", users);
 	}
 }
