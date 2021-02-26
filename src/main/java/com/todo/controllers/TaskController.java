@@ -1,4 +1,4 @@
-package com.todo.controllers;
+ package com.todo.controllers;
 
 import java.util.Date;
 
@@ -114,7 +114,7 @@ public class TaskController  {
                                              Model model) {
         userService.setLoginUser(model, user);
         companyService.setCompany(model, 1);
-        projectService.setProject(model, mini_project_id);
+        projectService.setProject(model, project_id);
         miniProjectService.setMiniProject(model, mini_project_id);
         miniProjectService.setMiniProjectList(model, project_id);
         taskService.setSerchedTaskList(model, keyword, status, priority, mini_project_id, sort, order);

@@ -13,12 +13,12 @@
 
 	<div class="main">
     	<div th:include="main-left"></div>
-		<div class="main-right">
-			<div class="project-titles" th:object="${mini_project}">
-				<h1 th:object="${project}" class="project-title" ><a  th:href="@{/miniProjectList/{project_id}(project_id=${id})}" th:text="${project_name}"></a> ＞ <span th:text="${mini_project.mini_project_title}"></span></h1>
+		<div class="main-right" th:object="${mini_project}">
+			<div class="project-titles" >
+				<h1 th:object="${project}" class="project-title" ><a  th:href="@{/miniProjectList/{project_id}(project_id=${mini_project.project_id})}" th:text="${project.project_name}"></a> ＞ <span th:text="${mini_project.mini_project_title}"></span></h1>
 				<a class="add-task" th:href="@{/{project_id}/{mini_project_id}/registerTask(project_id=1, mini_project_id=${mini_project.id})}">タスク追加</a>
 			</div>
-			<form class="search-form" th:object="${mini_project}" th:action="@{/{project_id}/searchTask/{mini_project_id}(project_id=${id},mini_project_id=${mini_project_id})}" method="post" >
+			<form class="search-form" th:action="@{/{project_id}/searchTask/{mini_project_id}(project_id=${mini_project.project_id},mini_project_id=${mini_project_id})}" method="post" >
 				<label>絞り込み</label>
 				<input type="text" name="keyword">
 				<select name="status" />
