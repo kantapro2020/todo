@@ -44,7 +44,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/login").usernameParameter("username").passwordParameter("password").permitAll()
                 .failureHandler(new ForwardAuthenticationFailureHandler("/login-error"))
-                .defaultSuccessUrl("/")
+                .defaultSuccessUrl("/1/projectList")
                 .and()
                 .logout().logoutUrl("/logout").invalidateHttpSession(true).deleteCookies("JSESSIONID").logoutSuccessUrl("/login").permitAll();
     }

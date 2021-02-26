@@ -12,9 +12,9 @@
     <body>
 	   	<header>
 	      <p id="btn" class="fas fa-align-justify" onclick="clickBtn()"></p>
-	      <h2><a class="header-title delete-decoration" href="/">TaskManager</a></h2>
+	      <h2><a class="header-title delete-decoration" th:href="@{/1/projectList}">TaskManager</a></h2>
 	      <div class="header-right">
-	        <a class="header-link delete-decoration" href="#">top</a>
+	        <a class="header-link delete-decoration" th:href="@{/1/projectList}">top</a>
 	         <form class="header-form" th:action="@{/logout}" method="post">
 	        	<input class="header-button"type="submit" value="ログアウト">
 	        </form>

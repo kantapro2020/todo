@@ -33,7 +33,9 @@ public class RootController {
 
     @RequestMapping("/")
     public String root(@AuthenticationPrincipal User user,Model model) {
-        userService.setLoginUser(model, user);
+        if(user !=null) {
+            userService.setLoginUser(model, user);
+        }
         companyService.setCompany(model,1);
         miniProjectService.setMiniProjectList(model, 1);
         return "index";
