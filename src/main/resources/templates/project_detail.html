@@ -16,7 +16,7 @@
 		<div class="main-right" th:object="${mini_project}">
 			<div class="project-titles" >
 				<h1 th:object="${project}" class="project-title" ><a  th:href="@{/miniProjectList/{project_id}(project_id=${mini_project.project_id})}" th:text="${project.project_name}"></a> ＞ <span th:text="${mini_project.mini_project_title}"></span></h1>
-				<a class="add-task" th:href="@{/{project_id}/{mini_project_id}/registerTask(project_id=1, mini_project_id=${mini_project.id})}">タスク追加</a>
+				<a class="add-task" th:href="@{/{project_id}/{mini_project_id}/registerTask(project_id=${mini_project.project_id}, mini_project_id=${mini_project.id})}">タスク追加</a>
 			</div>
 			<form class="search-form" th:action="@{/{project_id}/searchTask/{mini_project_id}(project_id=${mini_project.project_id},mini_project_id=${mini_project_id})}" method="post" >
 				<label>絞り込み</label>
@@ -84,7 +84,7 @@
 					<td class="task-width-80 margin-r" th:text="${task.fixed_cost}"></td> -->
 					<td class="task-list-name" th:text="${task.required_time}"></td>
 					<td class="task-list-name">
-						<form th:action="@{/{project_id}/deleteTask/{mini_project_id}/{task_id}(project_id=1, mini_project_id=${mini_project_id},task_id=${task.id})}" method="post">
+						<form th:action="@{/{project_id}/deleteTask/{mini_project_id}/{task_id}(project_id=${mini_project.project_id}, mini_project_id=${mini_project_id},task_id=${task.id})}" method="post">
 							<input type="submit" value="削除">
 						</form>
 					</td>

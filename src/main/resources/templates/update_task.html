@@ -15,7 +15,7 @@
 		<div th:include="main-left"></div>
 		<div class="main-right" th:object="${mini_project}">
 			<h1 class="page-title">タスク詳細／更新</h1>
-			<form class="form" th:object="${task}" th:action="@{/{project_id}/{mini_project_id}/updateTask/{task_id}(project_id=1,mini_project_id=${mini_project.id},task_id=${task.id})}" method ="post">
+			<form class="form" th:object="${task}" th:action="@{/{project_id}/{mini_project_id}/updateTask/{task_id}(project_id=${mini_project.project_id},mini_project_id=${mini_project.id},task_id=${task.id})}" method ="post">
 				<input type="hidden" th:field="${task.id}">
 				<span class="form-title">タスク名</span>
 				<input class="form-input" type="text" th:field="${task.task_title}">

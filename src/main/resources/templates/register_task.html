@@ -16,7 +16,7 @@
 	    <div th:include="main-left"></div>
 		<div class="main-right" th:object="${mini_project}">
 			<h1 class="page-title">タスク追加</h1>
-			<form class="form" th:action="@{/{project_id}/{mini_project_id}/registerTask(project_id=1, mini_project_id=${mini_project.id})}" method ="post" th:object="${taskBean}">
+			<form class="form" th:action="@{/{project_id}/{mini_project_id}/registerTask(project_id=${mini_project.project_id}, mini_project_id=${mini_project.id})}" method ="post" th:object="${taskBean}">
 				<span class="form-title">タスク名</span>
 				<input class="form-input" type="text" th:field="*{task_title}">
 				<span class="form-title">ステータス</span>

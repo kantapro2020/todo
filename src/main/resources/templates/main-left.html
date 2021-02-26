@@ -14,27 +14,9 @@
 			<h1 class="userdata" th:object="${user}" th:text="${user.username}">蛭間寛太</h1>
 	    </div>
 		<div class="list" th:object="${mini_projects}">
-			<h1 class="list-title">プロジェクトA</h1>
-			<p  th:if="${mini_projects}" th:each="mini_project:${mini_projects}"><a th:text="${mini_project.mini_project_title}" class="list-name"  th:href="@{/{project_id}/project_detail/{mini_project_id} (project_id=${mini_project.project_id},mini_project_id=${mini_project.id})}"></a></p>
+			<h1 th:if="${projects}" class="list-title" th:each="project:${projects}"><a th:href="@{/miniProjectList/{project_id}(project_id=${project.id})}"  class="list-name" th:text="${project.project_name}"></a></h1>
+			<p  th:if="${mini_projects}" class="list-title" th:each="mini_project:${mini_projects}"><a th:text="${mini_project.mini_project_title}" class="list-name"  th:href="@{/{project_id}/project_detail/{mini_project_id} (project_id=${mini_project.project_id},mini_project_id=${mini_project.id})}"></a></p>
 		</div>
     </div>
-
-<!-- <html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-	<div class="main-left">
-		    <div class="userdatas">
-				<h1 class="userdata">Y&I Group</h1>
-				<h1 class="userdata">蛭間寛太</h1>
-		    </div>
-			<div class="list"  th:object="${mini_projexts}">
-				<h1 class="list-title">プロジェクトA</h1>
-				<p  th:each="mini_project:${mini_projects}"><a th:text="${mini_project.mini_project_title}" class="list-name"  th:href="@{/{project_id}/project_detail/{mini_project_id} (project_id=1,mini_project_id=${mini_project.id})}"></a></p>
-			</div>
-	    </div> -->
-
 </body>
 </html>
